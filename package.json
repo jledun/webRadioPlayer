@@ -1,0 +1,12 @@
+{
+  "name": "webradioplayer",
+  "version": "1.0.0",
+  "description": "a small web radio player based on mplayer with web client",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Julien Ledun <j.ledun@iosystems.fr>",
+  "license": "MIT"
+}

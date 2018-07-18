@@ -1,0 +1,71 @@
+#EXTM3U
+#EXTINF:-1,France Inter
+http://direct.franceinter.fr/live/franceinter-midfi.mp3
+#EXTINF:-1,RTL2
+http://streaming.radio.rtl2.fr/rtl2-1-48-192
+#EXTINF:-1,NOVA
+http://broadcast.infomaniak.net:80/radionova-high.mp3
+#EXTINF:-1,FIP
+http://direct.fipradio.fr/live/fip-midfi.mp3?ID=76zqey582k
+#EXTINF:-1,Oui FM
+http://broadcast.infomaniak.net/ouifm-high.mp3
+#EXTINF:-1,TSF Jazz
+http://tsfjazz.ice.infomaniak.ch:80/tsfjazz-high.mp3
+#EXTINF:-1,NRJ
+http://mp3.live.tv-radio.com/nrj/all/nrj_113225.mp3
+#EXTINF:-1,RFM
+http://mp3lg4.tdf-cdn.com/8376/goo_091150.mp3
+#EXTINF:-1,M2 Rock
+http://opml.radiotime.com/Tune.ashx?id=s100938
+#EXTINF:-1,M2 Jazz
+http://live.m2stream.fr:80/m2jazz-128.mp3
+#EXTINF:-1,M2 Sunshine
+http://live.m2stream.fr:80/m2sunshine-128.mp3
+#EXTINF:-1,M2 Caliente
+http://live.m2stream.fr:80/m2caliente-128.mp3
+#EXTINF:-1,M2 Hit
+http://live.m2stream.fr:80/m2hit-128.mp3
+#EXTINF:-1,Hotmix Rock
+http://streamingads.hotmixradio.fm/hotmixradio-rock-128.mp3
+#EXTINF:-1,Hotmix Metal
+http://streamingads.hotmixradio.fm/hotmixradio-metal-128.mp3
+#EXTINF:-1,Hotmix Frenchy
+http://streamingads.hotmixradio.fm/hotmixradio-frenchy-128.mp3
+#EXTINF:-1,Hotmix Sunny
+http://streamingads.hotmixradio.fm/hotmixradio-sunny-128.mp3
+#EXTINF:-1,Hotmix Hits
+http://streamingads.hotmixradio.fm/hotmixradio-hits-128.mp3
+#EXTINF:-1,FIP autour du rock
+tunein:station:s262528
+#EXTINF:-1,FIP autour du groove
+tunein:station:s262537
+#EXTINF:-1,FIP autour du monde
+tunein:station:s262538
+#EXTINF:-1,FIP autour du jazz
+tunein:station:s262533
+#EXTINF:-1,Tout nouveau, tout FIP
+tunein:station:s262540
+#EXTINF:-1,KISS Pop Rock
+tunein:station:s165224
+#EXTINF:-1,FIP - FIP, radio musicale éclectique
+tunein:station:s15200
+#EXTINF:-1,Radio-D Pop-Rock - Pop / Rock
+tunein:station:s286549
+#EXTINF:-1,FIP autour de l?électro - De Air à Soulwax, de...
+tunein:station:s293089
+#EXTINF:-1,RadioMeuh.com
+tunein:station:s96629
+#EXTINF:-1,FIP autour du reggae
+tunein:station:s293090
+#EXTINF:-1,Reggaecity Radio
+tunein:station:s189241
+#EXTINF:-1,Spoon Radio
+tunein:station:s108673
+#EXTINF:-1,Hotmixradio 2000
+tunein:station:s216185
+#EXTINF:-1,RADIO HABANA SON CUBA
+tunein:station:s296365
+#EXTINF:-1,MFM - 1st International Radio
+tunein:station:s81348
+#EXTINF:-1,Pop Rock FM
+tunein:station:s81337
