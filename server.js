@@ -19,9 +19,12 @@ io.on('connection', (socket) => {
   socket.on('getUrl', () => {
     socket.emit('url', mp.getUrl());
   });
-  socket.on('playStream', (url) => {console.log('playStream: ' + JSON.stringify(url));});
+  socket.on('playStream', (url) => {
+    return mp.playStream(url);
+  });
   socket.on('volumeUp', () => {console.log('volume up');});
   socket.on('volumeDown', () => {console.log('volume down');});
+  socket.on('getStatus', () => socket.emit('status', mp.getStatus()));
 });
 
 http.listen(3000, function(){

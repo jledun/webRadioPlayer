@@ -50,6 +50,14 @@ socket.on('url', url => {
   document.getElementById('content').innerHTML = displayedWR;
 });
 
+let intervalData = setInterval(() => {
+  socket.emit('getStatus');
+}, 1000);
+socket.on('status', (status) => {
+  console.log(status);
+});
+
 window.addEventListener('beforeunload', event => {
+  if (intervalData) clearInterval (intervalData);
   socket.close();
 });
