@@ -1,34 +1,27 @@
 "use strict";
 
-const { spawn } = require('child_process');
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const path = require('path');
 
-const options = {
-  cli: [
-    '-slave',
-    // '-loop 0',
-    // '-ao pulse'
-  ]
-};
-const url = require(path.resolve('./').concat('/radioStreams.json'));
-let rt = [];
-let status = "";
+const mPlayerManager = require('./mplayer-manager.js');
+const mp = new mPlayerManager();
 
-const mp = spawn("mplayer", options.cli.concat(url[0].url));
+app.use(express.static(path.resolve(__dirname, 'front')));
 
-mp.stdout.on('data', data => {
-  const tmp = data.toString().trim();
-  if (tmp.substr(0, 2) === 'A:') {
-    status = tmp;
-  }else{
-    rt = rt.concat((tmp.split("\n").length > 0) ? tmp.split("\n") : [tmp]);
-  }
-  console.log(rt);
-  console.log(status);
+io.on('connection', (socket) => {
+  console.log('this a connection !');
+  socket.on('disconnect', reason => {
+    console.log('this is a deconnection: ' + reason);
+  });
+  socket.on('getUrl', () => {
+    socket.emit('url', mp.getUrl());
+  });
 });
-mp.stderr.on('data', data => {
-  console.log('error', data.toString());
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
-mp.on('close', () => {
-  console.log('fin');
-});
+
