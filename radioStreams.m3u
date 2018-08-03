@@ -36,36 +36,30 @@ http://streamingads.hotmixradio.fm/hotmixradio-sunny-128.mp3
 #EXTINF:-1,Hotmix Hits
 http://streamingads.hotmixradio.fm/hotmixradio-hits-128.mp3
 #EXTINF:-1,FIP autour du rock
-tunein:station:s262528
+http://direct.fipradio.fr/live/fip-webradio1.mp3
 #EXTINF:-1,FIP autour du groove
-tunein:station:s262537
+http://direct.fipradio.fr/live/fip-webradio3.mp3
 #EXTINF:-1,FIP autour du monde
-tunein:station:s262538
+http://direct.fipradio.fr/live/fip-webradio4.mp3
 #EXTINF:-1,FIP autour du jazz
-tunein:station:s262533
+http://direct.fipradio.fr/live/fip-webradio2.mp3
 #EXTINF:-1,Tout nouveau, tout FIP
-tunein:station:s262540
+http://direct.fipradio.fr/live/fip-webradio5.mp3
 #EXTINF:-1,KISS Pop Rock
-tunein:station:s165224
+https://kissfmcannes.ice.infomaniak.ch/kissfmcannes-128.mp3
 #EXTINF:-1,FIP - FIP, radio musicale éclectique
-tunein:station:s15200
-#EXTINF:-1,Radio-D Pop-Rock - Pop / Rock
-tunein:station:s286549
+http://direct.fipradio.fr/live/fip-midfi.mp3
 #EXTINF:-1,FIP autour de l?électro - De Air à Soulwax, de...
-tunein:station:s293089
+http://direct.fipradio.fr/live/fip-webradio8.mp3
 #EXTINF:-1,RadioMeuh.com
-tunein:station:s96629
+http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3
 #EXTINF:-1,FIP autour du reggae
-tunein:station:s293090
+http://direct.fipradio.fr/live/fip-webradio6.mp3
 #EXTINF:-1,Reggaecity Radio
-tunein:station:s189241
+http://s9.voscast.com:7728
 #EXTINF:-1,Spoon Radio
-tunein:station:s108673
+http://spoonradio.ice.infomaniak.ch/spoonradio-hd.mp3
 #EXTINF:-1,Hotmixradio 2000
-tunein:station:s216185
+http://streaming.hotmixradio.fm/hotmixradio-2k-128.mp3
 #EXTINF:-1,RADIO HABANA SON CUBA
-tunein:station:s296365
-#EXTINF:-1,MFM - 1st International Radio
-tunein:station:s81348
-#EXTINF:-1,Pop Rock FM
-tunein:station:s81337
+http://stream.zenolive.com/csqge48g044tv
