@@ -1,18 +1,38 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatGridListModule,
+  MatSliderModule,
+  MatToolbarModule
+} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MplayerRemoteService } from './mplayer-remote.service';
+import { WebRadioItemComponent } from './web-radio-item/web-radio-item.component';
+import { StatusComponent } from './status/status.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WebRadioItemComponent,
+    StatusComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatGridListModule,
+    MatSliderModule,
+    MatToolbarModule
   ],
-  providers: [],
+  providers: [MplayerRemoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

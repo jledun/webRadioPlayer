@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-title>
+    <span class="mat-body-2">{{url.name}}</span>
+  </mat-card-title>
+  <mat-card-content>
+    <app-status [status]="url.status"></app-status>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-mini-fab (click)="actionPlay()" *ngIf="url.status === 'stopped'">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="actionStop()" *ngIf="url.status !== 'stopped'">
+      <mat-icon>stop</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

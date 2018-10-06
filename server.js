@@ -8,16 +8,13 @@ const path = require('path');
 
 const mPlayerManager = require('./mplayer-manager.js');
 const mp = new mPlayerManager();
-const mpStatusUpdate = (nowPlaying, socket) => {
-  socket.emit('status', nowPlaying);
-};
 
 app.use(express.static(path.resolve(__dirname, 'front')));
 
 io.on('connection', (socket) => {
   socket.on('disconnect', reason => {
     console.log('client deconnected: ' + reason);
-    mp.removeListener('status', mpStatusUpdate);
+    mp.removeAllListeners('status');
   });
   socket.on('getUrl', () => {
     socket.emit('url', mp.getUrl());
@@ -27,7 +24,7 @@ io.on('connection', (socket) => {
   socket.on('volumeUp', () => mp.volumeUp());
   socket.on('volumeDown', () => mp.volumeDown());
   socket.on('volume', (val) => mp.volume(val));
-  mp.on('status', nowPlaying => mpStatusUpdate(nowPlaying, socket));
+  mp.on('status', nowPlaying => socket.emit('status', nowPlaying));
 });
 
 http.listen(3000, function(){

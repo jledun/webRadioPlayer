@@ -74,10 +74,10 @@ module.exports = class mPlayerManager extends EventEmitter {
       if (this.nowPlaying.status !== PLAYING) this.nowPlaying.status = PLAYING;
     }else{
       this.runtime = this.runtime.concat((tmp.split("\n").length > 0) ? tmp.split("\n") : [tmp]);
-      if (this.intRT) clearTimeout(this.intRT);
-      this.intRT = setTimeout(() => {
-        console.log(this.runtime);
-      }, 2000);
+      // if (this.intRT) clearTimeout(this.intRT);
+      // this.intRT = setTimeout(() => {
+        // console.log(this.runtime);
+      // }, 2000);
     }
     // console.log(this.currentlyPlaying);
   }
