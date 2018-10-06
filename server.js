@@ -5,6 +5,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
+const port = 80;
 
 const mPlayerManager = require('./mplayer-manager.js');
 const mp = new mPlayerManager();
@@ -27,7 +28,7 @@ io.on('connection', (socket) => {
   mp.on('status', nowPlaying => socket.emit('status', nowPlaying));
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(port, function(){
+  console.log('listening on *:' + port);
 });
 
