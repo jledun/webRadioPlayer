@@ -33,44 +33,89 @@ module.exports = class mPlayerManager extends EventEmitter {
       }
     };
     this.mp = {};
+    this.killCB = false;
     this.intStatus = setInterval(() => {
       this.emitStatus();
     }, 1000);
   };
 
-  playStream(url) {
+  checkStatus(cb) {
+    if (this.mpIsRunning()) {
+      this.killCB = cb;
+      return this.killPlayer();
+    }
+    cb();
+  }
+  mpIsRunning() {
+    return (this.mp && this.mp.hasOwnProperty('pid')) ? true : false;
+  }
+  killPlayer() {
+    if (!this.mpIsRunning()) return;
+    this.mp.stdin.write('quit\n');
+  }
+  setVolume(val, abs) {
+    if (!this.mpIsRunning()) return;
+    if (abs) return this.mp.stdin.write(`volume ${val} 1\n`);
+    return this.mp.stdin.write(`volume ${val}\n`);
+  }
+  mpNewPlayer(url) {
     this.mp = spawn("mplayer", this.options.cli.concat(url.url));
     this.nowPlaying.status = LOADING;
     this.nowPlaying.url = Object.assign({}, url);
 
-    this.mp.stdout.on('data', data => {
-      const tmp = data.toString().trim();
-      if (tmp.substr(0, 2) === 'A:') {
-        this.currentlyPlaying = tmp;
-        if (this.nowPlaying.status !== PLAYING) this.nowPlaying.status = PLAYING;
-      }else{
-        this.runtime = this.runtime.concat((tmp.split("\n").length > 0) ? tmp.split("\n") : [tmp]);
+    this.mp.stdout.on('data', data => this.mpStdout(data));
+    this.mp.stderr.on('data', data => this.mpStderr(data));
+    this.mp.on('close', () => this.mpClose());
+  }
+  mpStdout(data) {
+    const tmp = data.toString().trim();
+    if (tmp.substr(0, 2) === 'A:') {
+      this.currentlyPlaying = tmp;
+      if (this.nowPlaying.status !== PLAYING) this.nowPlaying.status = PLAYING;
+    }else{
+      this.runtime = this.runtime.concat((tmp.split("\n").length > 0) ? tmp.split("\n") : [tmp]);
+      if (this.intRT) clearTimeout(this.intRT);
+      this.intRT = setTimeout(() => {
         console.log(this.runtime);
-      }
-      // console.log(this.currentlyPlaying);
-    });
-    this.mp.stderr.on('data', data => {
-      console.log('error', data.toString());
-    });
-    this.mp.on('close', () => {
-      console.log('fin');
-      this.nowPlaying.status = STOPPED;
+      }, 2000);
+    }
+    // console.log(this.currentlyPlaying);
+  }
+  mpStderr(data) {
+    console.log('error', data.toString());
+  }
+  mpClose() {
+    console.log('fin');
+    this.nowPlaying.status = STOPPED;
+    this.resetMp();
+  }
+
+  resetMp() {
+    this.mp.stdout.removeAllListeners('data');
+    this.mp.stderr.removeAllListeners('data');
+    this.mp.removeAllListeners('close');
+    this.mp = {};
+    if (typeof this.killCB === "function") return this.killCB();
+  }
+
+  playStream(url) {
+    this.checkStatus(() => {
+      this.mpNewPlayer(url);
+      this.killCB = false;
     });
   };
 
   stopStream(url) {
-    console.log('stoppe moi !!!');
+    this.killPlayer();
   }
-  volumeUp(url) {
-    console.log('volume up');
+  volumeUp() {
+    this.setVolume(1);
   }
-  volumeDown(url) {
-    console.log('volume down');
+  volumeDown() {
+    this.setVolume(-1);
+  }
+  volume(val) {
+    this.setVolume(Number(val), true);
   }
 
   getStatus() {

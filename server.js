@@ -24,8 +24,9 @@ io.on('connection', (socket) => {
   });
   socket.on('playStream', url => mp.playStream(url));
   socket.on('stopStream', url => mp.stopStream(url));
-  socket.on('volumeUp', () => mp.volumeUp(url));
-  socket.on('volumeDown', () => mp.volumeDown(url));
+  socket.on('volumeUp', () => mp.volumeUp());
+  socket.on('volumeDown', () => mp.volumeDown());
+  socket.on('volume', (val) => mp.volume(val));
   mp.on('status', nowPlaying => mpStatusUpdate(nowPlaying, socket));
 });
 
