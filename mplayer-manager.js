@@ -66,6 +66,12 @@ module.exports = class mPlayerManager extends EventEmitter {
   stopStream(url) {
     console.log('stoppe moi !!!');
   }
+  volumeUp(url) {
+    console.log('volume up');
+  }
+  volumeDown(url) {
+    console.log('volume down');
+  }
 
   getStatus() {
     if (!this.mp || !this.mp.stdin) return {};

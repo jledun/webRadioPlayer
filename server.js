@@ -22,17 +22,11 @@ io.on('connection', (socket) => {
   socket.on('getUrl', () => {
     socket.emit('url', mp.getUrl());
   });
-  socket.on('playStream', (url) => {
-    return mp.playStream(url);
-  });
-  socket.on('stopStream', (url) => {
-    return mp.stopStream(url);
-  });
-  socket.on('volumeUp', () => {console.log('volume up');});
-  socket.on('volumeDown', () => {console.log('volume down');});
-  mp.on('status', nowPlaying => {
-    mpStatusUpdate(nowPlaying, socket);
-  });
+  socket.on('playStream', url => mp.playStream(url));
+  socket.on('stopStream', url => mp.stopStream(url));
+  socket.on('volumeUp', () => mp.volumeUp(url));
+  socket.on('volumeDown', () => mp.volumeDown(url));
+  mp.on('status', nowPlaying => mpStatusUpdate(nowPlaying, socket));
 });
 
 http.listen(3000, function(){
