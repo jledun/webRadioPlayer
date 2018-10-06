@@ -27,8 +27,8 @@ export class MplayerRemoteService {
 
   constructor() {
     this.serverUrl = new URL(window.location.href);
-    // this.socket = io(this.serverUrl.href);
-    this.socket = io('http://192.168.1.108:3000');
+    this.socket = io(this.serverUrl.href);
+    // this.socket = io('http://192.168.1.108:3000');
     this.socket.on('url', url => this.url = url);
     this.socket.on('status', status => this.status = status);
     this.socket.emit('getUrl');
