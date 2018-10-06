@@ -35,5 +35,11 @@ export class AppComponent {
   pause(url: any) {
     console.log('pause: ', url);
   }
+  volumeUp() {
+    this.mPlayer.volumeUp();
+  }
+  volumeDown() {
+    this.mPlayer.volumeDown();
+  }
 
 }

@@ -1,11 +1,11 @@
 <mat-toolbar>
-  <span>{{title}}</span>
-  <span *ngIf="displayTitle()" class="fill-space"></span>
+  <span fxShow.lt-sm="false">{{title}}</span>
+  <span fxShow.lt-sm="false" *ngIf="displayTitle()" class="fill-space"></span>
   <span *ngIf="displayTitle()">
      {{mPlayer.status.url.name}}
   </span>
   <span class="fill-space"></span>
-  <button mat-mini-fab>
+  <button mat-mini-fab (click)="volumeDown()" class="toolbar-button">
     <mat-icon>volume_down</mat-icon>
   </button>
   <!--mat-slider
@@ -16,7 +16,7 @@
     [value]="absVolume"
     (change)="setVolume($event)">
   </mat-slider-->
-  <button mat-mini-fab>
+  <button mat-mini-fab (click)="volumeUp()" class="toolbar-button">
     <mat-icon>volume_up</mat-icon>
   </button>
 </mat-toolbar>
