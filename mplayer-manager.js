@@ -19,6 +19,7 @@ module.exports = class mPlayerManager extends EventEmitter {
     super();
     this.url = require(path.resolve('./').concat('/radioStreams.json'));
     this.options = {
+      app: '/usr/bin/mplayer',
       cli: ['-slave']
     };
     this.runtime = [];
@@ -34,6 +35,7 @@ module.exports = class mPlayerManager extends EventEmitter {
     };
     this.mp = {};
     this.killCB = false;
+    this.loop = false;
     this.intStatus = setInterval(() => {
       this.emitStatus();
     }, 1000);
@@ -59,7 +61,8 @@ module.exports = class mPlayerManager extends EventEmitter {
     return this.mp.stdin.write(`volume ${val}\n`);
   }
   mpNewPlayer(url) {
-    this.mp = spawn("mplayer", this.options.cli.concat(url.url));
+    this.mp = spawn(this.options.app, this.options.cli.concat(url.url));
+    this.loop = false;
     this.nowPlaying.status = LOADING;
     this.nowPlaying.url = Object.assign({}, url);
 
@@ -72,6 +75,10 @@ module.exports = class mPlayerManager extends EventEmitter {
     if (tmp.substr(0, 2) === 'A:') {
       this.currentlyPlaying = tmp;
       if (this.nowPlaying.status !== PLAYING) this.nowPlaying.status = PLAYING;
+      if (!this.loop) {
+        this.loop = true;
+        this.mp.stdin.write('loop 0');
+      }
     }else{
       this.runtime = this.runtime.concat((tmp.split("\n").length > 0) ? tmp.split("\n") : [tmp]);
       // if (this.intRT) clearTimeout(this.intRT);
