@@ -1,33 +1,157 @@
 [
-  {"name":"France Inter", "url": "http://direct.franceinter.fr/live/franceinter-midfi.mp3"}, 
-  {"name":"RTL2", "url": "http://streaming.radio.rtl2.fr/rtl2-1-48-192"},
-  {"name":"NOVA", "url": "http://broadcast.infomaniak.net:80/radionova-high.mp3"}, 
-  {"name":"FIP", "url": "http://direct.fipradio.fr/live/fip-midfi.mp3?ID=76zqey582k"},
-  {"name":"Oui FM", "url": "http://broadcast.infomaniak.net/ouifm-high.mp3"},
-  {"name":"TSF Jazz", "url": "http://tsfjazz.ice.infomaniak.ch:80/tsfjazz-high.mp3"},
-  {"name":"NRJ", "url": "http://mp3.live.tv-radio.com/nrj/all/nrj_113225.mp3"},
-  {"name":"RFM", "url": "http://mp3lg4.tdf-cdn.com/8376/goo_091150.mp3"},
-  {"name":"M2 Rock", "url": "http://opml.radiotime.com/Tune.ashx?id=s100938"},
-  {"name":"M2 Jazz", "url": "http://live.m2stream.fr:80/m2jazz-128.mp3"},
-  {"name":"M2 Sunshine", "url": "http://live.m2stream.fr:80/m2sunshine-128.mp3"},
-  {"name":"M2 Caliente", "url": "http://live.m2stream.fr:80/m2caliente-128.mp3"},
-  {"name":"M2 Hit", "url": "http://live.m2stream.fr:80/m2hit-128.mp3"},
-  {"name":"Hotmix Rock", "url": "http://streamingads.hotmixradio.fm/hotmixradio-rock-128.mp3"},
-  {"name":"Hotmix Metal", "url": "http://streamingads.hotmixradio.fm/hotmixradio-metal-128.mp3"},
-  {"name":"Hotmix Frenchy", "url": "http://streamingads.hotmixradio.fm/hotmixradio-frenchy-128.mp3"},
-  {"name":"Hotmix Sunny", "url": "http://streamingads.hotmixradio.fm/hotmixradio-sunny-128.mp3"},
-  {"name":"Hotmix Hits", "url": "http://streamingads.hotmixradio.fm/hotmixradio-hits-128.mp3"},
-  {"name":"FIP autour du rock", "url": "http://direct.fipradio.fr/live/fip-webradio1.mp3"},
-  {"name":"FIP autour du groove", "url": "http://direct.fipradio.fr/live/fip-webradio3.mp3"},
-  {"name":"FIP autour du monde", "url": "http://direct.fipradio.fr/live/fip-webradio4.mp3"},
-  {"name":"FIP autour du jazz", "url": "http://direct.fipradio.fr/live/fip-webradio2.mp3"},
-  {"name":"Tout nouveau, tout FIP", "url": "http://direct.fipradio.fr/live/fip-webradio5.mp3"},
-  {"name":"KISS Pop Rock", "url": "https://kissfmcannes.ice.infomaniak.ch/kissfmcannes-128.mp3"},
-  {"name":"FIP autour de l'electro", "url": "http://direct.fipradio.fr/live/fip-webradio8.mp3"},
-  {"name":"RadioMeuh.com", "url": "http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3"},
-  {"name":"FIP autour du reggae", "url": "http://direct.fipradio.fr/live/fip-webradio6.mp3"},
-  {"name":"Reggaecity Radio", "url": "http://s9.voscast.com:7728"},
-  {"name":"Spoon Radio", "url": "http://spoonradio.ice.infomaniak.ch/spoonradio-hd.mp3"},
-  {"name":"Hotmixradio 2000", "url": "http://streaming.hotmixradio.fm/hotmixradio-2k-128.mp3"},
-  {"name":"RADIO HABANA SON CUBA", "url": "http://stream.zenolive.com/csqge48g044tv"}
+ {
+  "id": 0,
+  "name": "France Inter",
+  "url": "http://direct.franceinter.fr/live/franceinter-midfi.mp3"
+ },
+ {
+  "id": 1,
+  "name": "RTL2",
+  "url": "http://streaming.radio.rtl2.fr/rtl2-1-48-192"
+ },
+ {
+  "id": 2,
+  "name": "NOVA",
+  "url": "http://broadcast.infomaniak.net:80/radionova-high.mp3"
+ },
+ {
+  "id": 3,
+  "name": "FIP",
+  "url": "http://direct.fipradio.fr/live/fip-midfi.mp3?ID=76zqey582k"
+ },
+ {
+  "id": 4,
+  "name": "Oui FM",
+  "url": "http://broadcast.infomaniak.net/ouifm-high.mp3"
+ },
+ {
+  "id": 5,
+  "name": "TSF Jazz",
+  "url": "http://tsfjazz.ice.infomaniak.ch:80/tsfjazz-high.mp3"
+ },
+ {
+  "id": 6,
+  "name": "NRJ",
+  "url": "http://mp3.live.tv-radio.com/nrj/all/nrj_113225.mp3"
+ },
+ {
+  "id": 7,
+  "name": "RFM",
+  "url": "http://mp3lg4.tdf-cdn.com/8376/goo_091150.mp3"
+ },
+ {
+  "id": 8,
+  "name": "M2 Rock",
+  "url": "http://opml.radiotime.com/Tune.ashx?id=s100938"
+ },
+ {
+  "id": 9,
+  "name": "M2 Jazz",
+  "url": "http://live.m2stream.fr:80/m2jazz-128.mp3"
+ },
+ {
+  "id": 10,
+  "name": "M2 Sunshine",
+  "url": "http://live.m2stream.fr:80/m2sunshine-128.mp3"
+ },
+ {
+  "id": 11,
+  "name": "M2 Caliente",
+  "url": "http://live.m2stream.fr:80/m2caliente-128.mp3"
+ },
+ {
+  "id": 12,
+  "name": "M2 Hit",
+  "url": "http://live.m2stream.fr:80/m2hit-128.mp3"
+ },
+ {
+  "id": 13,
+  "name": "Hotmix Rock",
+  "url": "http://streamingads.hotmixradio.fm/hotmixradio-rock-128.mp3"
+ },
+ {
+  "id": 14,
+  "name": "Hotmix Metal",
+  "url": "http://streamingads.hotmixradio.fm/hotmixradio-metal-128.mp3"
+ },
+ {
+  "id": 15,
+  "name": "Hotmix Frenchy",
+  "url": "http://streamingads.hotmixradio.fm/hotmixradio-frenchy-128.mp3"
+ },
+ {
+  "id": 16,
+  "name": "Hotmix Sunny",
+  "url": "http://streamingads.hotmixradio.fm/hotmixradio-sunny-128.mp3"
+ },
+ {
+  "id": 17,
+  "name": "Hotmix Hits",
+  "url": "http://streamingads.hotmixradio.fm/hotmixradio-hits-128.mp3"
+ },
+ {
+  "id": 18,
+  "name": "FIP autour du rock",
+  "url": "http://direct.fipradio.fr/live/fip-webradio1.mp3"
+ },
+ {
+  "id": 19,
+  "name": "FIP autour du groove",
+  "url": "http://direct.fipradio.fr/live/fip-webradio3.mp3"
+ },
+ {
+  "id": 20,
+  "name": "FIP autour du monde",
+  "url": "http://direct.fipradio.fr/live/fip-webradio4.mp3"
+ },
+ {
+  "id": 21,
+  "name": "FIP autour du jazz",
+  "url": "http://direct.fipradio.fr/live/fip-webradio2.mp3"
+ },
+ {
+  "id": 22,
+  "name": "Tout nouveau, tout FIP",
+  "url": "http://direct.fipradio.fr/live/fip-webradio5.mp3"
+ },
+ {
+  "id": 23,
+  "name": "KISS Pop Rock",
+  "url": "https://kissfmcannes.ice.infomaniak.ch/kissfmcannes-128.mp3"
+ },
+ {
+  "id": 24,
+  "name": "FIP autour de l'electro",
+  "url": "http://direct.fipradio.fr/live/fip-webradio8.mp3"
+ },
+ {
+  "id": 25,
+  "name": "RadioMeuh.com",
+  "url": "http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3"
+ },
+ {
+  "id": 26,
+  "name": "FIP autour du reggae",
+  "url": "http://direct.fipradio.fr/live/fip-webradio6.mp3"
+ },
+ {
+  "id": 27,
+  "name": "Reggaecity Radio",
+  "url": "http://s9.voscast.com:7728"
+ },
+ {
+  "id": 28,
+  "name": "Spoon Radio",
+  "url": "http://spoonradio.ice.infomaniak.ch/spoonradio-hd.mp3"
+ },
+ {
+  "id": 29,
+  "name": "Hotmixradio 2000",
+  "url": "http://streaming.hotmixradio.fm/hotmixradio-2k-128.mp3"
+ },
+ {
+  "id": 30,
+  "name": "RADIO HABANA SON CUBA",
+  "url": "http://stream.zenolive.com/csqge48g044tv"
+ }
 ]

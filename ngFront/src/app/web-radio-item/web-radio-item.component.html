@@ -1,7 +1,23 @@
 <mat-card>
-  <mat-card-title>
-    <span class="mat-body-2">{{url.name}}</span>
-  </mat-card-title>
+  <mat-card-header>
+    <mat-card-title>{{url.name}}</mat-card-title>
+    <span class="fill-space"></span>
+    <button mat-icon-button [matMenuTriggerFor]="editRadioMenu"><mat-icon>more_vert</mat-icon></button>
+    <mat-menu #editRadioMenu="matMenu">
+      <button mat-menu-item (click)="editWebRadio()">
+        <mat-icon>edit</mat-icon>
+        <span>Modifier</span>
+      </button>
+      <button mat-menu-item (click)="duplicateWebRadio()">
+        <mat-icon>file_copy</mat-icon>
+        <span>Dupliquer</span>
+      </button>
+      <button mat-menu-item (click)="deleteWebRadio()">
+        <mat-icon>delete</mat-icon>
+        <span>Supprimer</span>
+      </button>
+    </mat-menu>
+  </mat-card-header>
   <mat-card-content>
     <app-status [status]="url.status"></app-status>
   </mat-card-content>

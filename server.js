@@ -11,6 +11,14 @@ const port = 6680;
 const mPlayerManager = require('./mplayer-manager.js');
 const mp = new mPlayerManager();
 
+const jsonParser = require('body-parser').json();
+const fileManager = require('./json-file-middleware.js');
+app.use('/fileActions', jsonParser);
+app.get('/fileActions', fileManager.get);
+app.post('/fileActions', fileManager.post);
+app.put('/fileActions/:id', fileManager.put);
+app.delete('/fileActions/:id', fileManager.delete);
+
 app.use(express.static(path.resolve(__dirname, 'front')));
 
 io.on('connection', (socket) => {

@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{data.dialogTitle}}</h1>
+<div mat-dialog-content>
+  <div 
+    class="full-size"
+    fxLayout="column nowrap" 
+    fxLayoutAlign="start stretch" 
+    fxLayoutGap="5px">
+    <mat-form-field fxFlex="1 0 auto">
+      <input matInput placeholder="Nom" [(ngModel)]="data.url.name">
+    </mat-form-field>
+    <mat-form-field fxFlex="1 0 auto">
+      <input matInput placeholder="URL" [(ngModel)]="data.url.url">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Annuler</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Enregistrer</button>
+</div>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import * as io from 'socket.io-client';
 
 @Injectable({
@@ -25,10 +26,12 @@ export class MplayerRemoteService {
     if (index >= 0) this._url[index].status = val.status;
   }
 
-  constructor() {
+  constructor(
+    snackBar: MatSnackBar
+  ) {
     this.serverUrl = new URL(window.location.href);
-    this.socket = io(this.serverUrl.href);
-    // this.socket = io('http://192.168.1.108:3000');
+    // this.socket = io(this.serverUrl.href);
+    this.socket = io('http://192.168.1.108:6680');
     this.socket.on('url', url => this.url = url);
     this.socket.on('status', status => this.status = status);
     this.socket.emit('getUrl');
