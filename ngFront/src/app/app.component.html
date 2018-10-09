@@ -1,5 +1,9 @@
 <mat-toolbar>
   <span fxShow.lt-sm="false">{{title}}</span>
+  <button mat-button (click)="createUrl()" class="toolbar-button">
+    <mat-icon>add</mat-icon>
+    <span>Ajouter</span>
+  </button>
   <span fxShow.lt-sm="false" *ngIf="displayTitle()" class="fill-space"></span>
   <span *ngIf="displayTitle()">
      {{mPlayer.status.url.name}}
@@ -22,7 +26,7 @@
 </mat-toolbar>
 
 <ng-container *ngIf="mPlayer.url.length > 0">
-  <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="5px">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="5px">
     <div fxFlex="21%" fxFlex.lt-sm="95%" fxFlex.lt-md="45%" *ngFor="let u of mPlayer.url" class="spacer">
       <app-web-radio-item
         [url]="u"

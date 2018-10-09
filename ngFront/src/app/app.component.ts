@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { MplayerRemoteService } from './mplayer-remote.service';
+import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.component';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,7 @@ export class AppComponent {
   }
 
   constructor(
+    public dialog: MatDialog,
     public mPlayer: MplayerRemoteService
   ) {}
 
@@ -40,6 +43,20 @@ export class AppComponent {
   }
   volumeDown() {
     this.mPlayer.volumeDown();
+  }
+  createUrl() {
+    const dialogRef = this.dialog.open(WebRadioEditorComponent, {
+      width: '40%',
+      data: {
+        url: {name: '', url: ''},
+        dialogType: 'create',
+        dialogTitle: 'Ajouter une web radio'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.mPlayer.addUrl(result.url);
+    });
   }
 
 }

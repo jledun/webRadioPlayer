@@ -38,7 +38,6 @@ export class MplayerRemoteService {
     // this.socket = io('http://192.168.1.108:6680');
     this.socket.on('url', url => this.url = url);
     this.socket.on('status', status => this.status = status);
-    // this.socket.emit('getUrl');
    
     this.apiUrl = this.serverUrl.href.concat('fileActions');
     // this.apiUrl = 'http://192.168.1.108:6680'.concat('/fileActions');
