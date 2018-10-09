@@ -23,13 +23,15 @@ import { MplayerRemoteService } from './mplayer-remote.service';
 import { WebRadioItemComponent } from './web-radio-item/web-radio-item.component';
 import { StatusComponent } from './status/status.component';
 import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.component';
+import { WebRadioBrowserPlayerComponent } from './web-radio-browser-player/web-radio-browser-player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WebRadioItemComponent,
     StatusComponent,
-    WebRadioEditorComponent
+    WebRadioEditorComponent,
+    WebRadioBrowserPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.com
     MatToolbarModule
   ],
   entryComponents: [
-    WebRadioEditorComponent
+    WebRadioEditorComponent,
+    WebRadioBrowserPlayerComponent
   ],
   providers: [MplayerRemoteService],
   bootstrap: [AppComponent]

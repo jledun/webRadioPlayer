@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+<div mat-dialog-content>
+  <div 
+    fxLayout="row nowrap"
+    fxLayoutAlign="center center"
+    *ngIf="data.url && data.url !== ''">
+    <audio
+      controls
+      autoplay
+      [src]="data.url"
+      ></audio>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Fermer</button>
+</div>

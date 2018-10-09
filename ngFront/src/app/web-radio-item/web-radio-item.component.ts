@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MplayerRemoteService } from '../mplayer-remote.service';
 import { WebRadioEditorComponent } from '../web-radio-editor/web-radio-editor.component';
+import { WebRadioBrowserPlayerComponent } from '../web-radio-browser-player/web-radio-browser-player.component';
 
 @Component({
   selector: 'app-web-radio-item',
@@ -18,6 +19,19 @@ export class WebRadioItemComponent {
     public dialog: MatDialog,
     private mPlayer: MplayerRemoteService
   ) { }
+
+  playWebRadioInBrowser() {
+    const dialogRef = this.dialog.open(
+      WebRadioBrowserPlayerComponent, {
+        data: Object.assign({}, this.url),
+        closeOnNavigation: false,
+        disableClose: true
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
   editWebRadio() {
     const dialogRef = this.dialog.open(WebRadioEditorComponent, {
