@@ -41,9 +41,10 @@ With your favorite text editor, edit radioStreams.json and add or remove web rad
 
 By default, there's a few french web radios (because I'm french).
 
+You can now duplicate, update or delete web radio in radioStreams.json directly from the UI.
+
 # TODO
 
-* add or remove web radios from web application
 * show mplayer statistics
 * hability to listen to web radios in the browser
 
