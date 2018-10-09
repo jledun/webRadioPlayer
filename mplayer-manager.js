@@ -22,7 +22,7 @@ module.exports = class mPlayerManager extends EventEmitter {
       app: '/usr/bin/mplayer',
       cli: ['-slave']
     };
-    this.runtime = [];
+    this.runtime = '';
     this.currentlyPlaying = "";
     this.nowPlaying = {
       status: STOPPED,
@@ -71,20 +71,23 @@ module.exports = class mPlayerManager extends EventEmitter {
     this.mp.on('close', () => this.mpClose());
   }
   mpStdout(data) {
-    const tmp = data.toString().trim();
+    const tmp = data.toString('utf-8').trim();
     if (tmp.substr(0, 2) === 'A:') {
       this.currentlyPlaying = tmp;
       if (this.nowPlaying.status !== PLAYING) this.nowPlaying.status = PLAYING;
       if (!this.loop) {
         this.loop = true;
-        this.mp.stdin.write('loop 0');
+        setTimeout(() => {
+          this.mp.stdin.write('loop 1\n');
+        }, 4000);
       }
     }else{
-      this.runtime = this.runtime.concat((tmp.split("\n").length > 0) ? tmp.split("\n") : [tmp]);
-      // if (this.intRT) clearTimeout(this.intRT);
-      // this.intRT = setTimeout(() => {
-        // console.log(this.runtime);
-      // }, 2000);
+      this.runtime = this.runtime.concat(tmp);
+      if (this.intRT) clearTimeout(this.intRT);
+      this.intRT = setTimeout(() => {
+        console.log(this.runtime);
+        this.runtime = '';
+      }, 2000);
     }
     // console.log(this.currentlyPlaying);
   }
