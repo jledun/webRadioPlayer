@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { MplayerRemoteService } from '../mplayer-remote.service';
 import { WebRadioEditorComponent } from '../web-radio-editor/web-radio-editor.component';
 
 @Component({
@@ -14,7 +15,8 @@ export class WebRadioItemComponent {
   @Output() pause: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private mPlayer: MplayerRemoteService
   ) { }
 
   editWebRadio() {
@@ -28,28 +30,26 @@ export class WebRadioItemComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The edit dialog was closed');
-      console.log(result);
+      this.mPlayer.updateUrl(result.url);
     });
   }
   duplicateWebRadio() {
     const dialogRef = this.dialog.open(WebRadioEditorComponent, {
       width: '40%',
       data: {
-        url: Object.assign({}, {name: 'Copie de '.concat(this.url.name), url: this.url.url});
+        url: Object.assign({}, {name: 'Copie de '.concat(this.url.name), url: this.url.url}),
         dialogType: 'copy',
         dialogTitle: 'Dupliquer une web radio'
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The duplicate dialog was closed');
-      console.log(result);
+      this.mPlayer.addUrl(result.url);
     });
   }
   deleteWebRadio() {
     if (confirm(`Étes-vous sûr(e) de vouloir supprimer ${this.url.name} ?`)) {
-      console.log('suppression de la web radio');
+      this.mPlayer.deleteUrl(this.url);
     }
   }
 

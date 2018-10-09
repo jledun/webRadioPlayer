@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as io from 'socket.io-client';
 
 @Injectable({
@@ -7,7 +8,9 @@ import * as io from 'socket.io-client';
 })
 export class MplayerRemoteService {
   private socket;
+  private httpHeaders;
   private serverUrl; 
+  private apiUrl;
   private _url: Array<any> = [];
   private _status: any = {};
   public get url() {
@@ -27,14 +30,20 @@ export class MplayerRemoteService {
   }
 
   constructor(
-    snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private http: HttpClient
   ) {
     this.serverUrl = new URL(window.location.href);
-    // this.socket = io(this.serverUrl.href);
-    this.socket = io('http://192.168.1.108:6680');
+    this.socket = io(this.serverUrl.href);
+    // this.socket = io('http://192.168.1.108:6680');
     this.socket.on('url', url => this.url = url);
     this.socket.on('status', status => this.status = status);
-    this.socket.emit('getUrl');
+    // this.socket.emit('getUrl');
+   
+    this.apiUrl = this.serverUrl.href.concat('fileActions');
+    // this.apiUrl = 'http://192.168.1.108:6680'.concat('/fileActions');
+    this.httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    this.getUrl();
   }
 
   checkSocket() {
@@ -59,5 +68,42 @@ export class MplayerRemoteService {
     this.socket.emit('volumeDown');
   }
 
+  private success(data) {
+    this.url = [].concat(data);
+    this.snackBar.open('Données mises à jour :-)', 'Ok', {duration: 2000});
+  }
+  private failure(err) {
+    console.log(err);
+    this.snackBar.open("Une erreur s'est produite", 'Ok', {duration: 2000})
+  }
+
+  public getUrl() {
+    this.http.get(this.apiUrl, {headers: this.httpHeaders}).subscribe(
+      data => this.success(data),
+      err => this.failure(err),
+      () => {}
+    );
+  }
+  public addUrl(url) {
+    this.http.post(this.apiUrl, url, {headers: this.httpHeaders}).subscribe(
+      data => this.success(data),
+      err => this.failure(err),
+      () => {}
+    );
+  }
+  public updateUrl(url) {
+    this.http.put(this.apiUrl.concat('/', url.id.toString()), url, {headers: this.httpHeaders}).subscribe(
+      data => this.success(data),
+      err => this.failure(err),
+      () => {}
+    );
+  }
+  public deleteUrl(url) {
+    this.http.delete(this.apiUrl.concat('/', url.id.toString()), {headers: this.httpHeaders}).subscribe(
+      data => this.success(data),
+      err => this.failure(err),
+      () => {}
+    );
+  }
 
 }

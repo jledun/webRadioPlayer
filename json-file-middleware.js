@@ -75,8 +75,11 @@ module.exports = {
   get: (req, res, next) => {
     // retrieve the entire web radios list
     readWebRadioList().subscribe(
-      data => res.status(200).type('application/json').json(data),
-      err => res.status(500).end(),
+      data => {
+        res.type('json');
+        res.status(200).json(data)
+      },
+      err => res.sendStatus(500),
       () => {}
     );
   },
@@ -85,11 +88,14 @@ module.exports = {
     // data validation
     const newWebRadio = Object.assign({}, req.body);
     if (!checkUrl(newWebRadio)) {
-      return res.status(400).end();
+      return res.sendStatus(400);
     }
     addWebRadio(newWebRadio).subscribe(
-      data => res.status(200).type('application/json').json(data),
-      err => res.status(500).end(),
+      data => {
+        res.type('json');
+        res.status(200).json(data)
+      },
+      err => res.sendStatus(500),
       () => {}
     );
   },
@@ -98,11 +104,14 @@ module.exports = {
     const newWebRadio = Object.assign({}, req.body);
     const id = Number(req.params.id);
 
-    if (!checkUrl(newWebRadio)) return res.status(400).end();
+    if (!checkUrl(newWebRadio)) return res.sendStatus(400)
 
     updateWebRadio(id, newWebRadio).subscribe(
-      data => res.status(200).type('application/json').json(data),
-      err => res.status(404).end(),
+      data => {
+        res.type('json');
+        res.status(200).json(data)
+      },
+      err => res.sendStatus(404),
       () => {}
     );
   },
@@ -110,8 +119,11 @@ module.exports = {
     // delete an existing web radio
     const id = Number(req.params.id);
     deleteWebRadio(id).subscribe(
-      data => res.status(200).type('application/json').json(data),
-      err => res.status(404).end(),
+      data => {
+        res.type('json');
+        res.status(200).json(data)
+      },
+      err => res.sendStatus(404),
       () => {}
     );
   }
