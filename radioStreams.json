@@ -8,7 +8,8 @@
  {
   "id": 1,
   "name": "RTL2",
-  "url": "http://streaming.radio.rtl2.fr/rtl2-1-48-192"
+  "url": "http://streaming.radio.rtl2.fr/rtl2-1-48-192",
+  "status": "stopped"
  },
  {
   "id": 2,

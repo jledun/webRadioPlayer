@@ -51,14 +51,17 @@ module.exports = class mPlayerManager extends EventEmitter {
   mpIsRunning() {
     return (this.mp && this.mp.hasOwnProperty('pid')) ? true : false;
   }
-  killPlayer() {
+  mpCommand(cmd) {
     if (!this.mpIsRunning()) return;
-    this.mp.stdin.write('quit\n');
+    this.mp.stdin.write(cmd.concat("\n"));
+  }
+  killPlayer() {
+    this.mpCommand('quit');
   }
   setVolume(val, abs) {
     if (!this.mpIsRunning()) return;
-    if (abs) return this.mp.stdin.write(`volume ${val} 1\n`);
-    return this.mp.stdin.write(`volume ${val}\n`);
+    if (abs) return this.mpCommand(`volume ${val} 1`);
+    return this.mpCommand(`volume ${val}`);
   }
   mpNewPlayer(url) {
     this.mp = spawn(this.options.app, this.options.cli.concat(url.url));
@@ -78,7 +81,7 @@ module.exports = class mPlayerManager extends EventEmitter {
       if (!this.loop) {
         this.loop = true;
         setTimeout(() => {
-          this.mp.stdin.write('loop 1\n');
+          this.mpCommand('loop 1');
         }, 4000);
       }
     }else{
@@ -129,8 +132,7 @@ module.exports = class mPlayerManager extends EventEmitter {
   }
 
   getStatus() {
-    if (!this.mp || !this.mp.stdin) return {};
-    this.mp.stdin.write("get_time_pos\n");
+    this.mpCommand("get_time_pos");
   }
 
   getUrl() {

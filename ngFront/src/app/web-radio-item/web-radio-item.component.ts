@@ -44,6 +44,7 @@ export class WebRadioItemComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (!result || !result.hasOwnProperty('url')) return;
       this.mPlayer.updateUrl(result.url);
     });
   }
@@ -58,6 +59,7 @@ export class WebRadioItemComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (!result || !result.hasOwnProperty('url')) return;
       this.mPlayer.addUrl(result.url);
     });
   }
