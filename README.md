@@ -17,10 +17,10 @@ and everything to get some sound on your client
 ## run application
 
 ```bash
-$> git clone https://github.com/jledun/webRadioPlayer.git
-$> cd webRadioPlayer
-$> npm install
-$> node .
+> git clone https://github.com/jledun/webRadioPlayer.git
+> cd webRadioPlayer
+> npm install
+> node .
 ```
 
 ## reach web ui
