@@ -1,6 +1,6 @@
 {
   "name": "webradioplayer",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "a small web radio player based on mplayer with web client",
   "main": "server.js",
   "scripts": {
@@ -9,6 +9,14 @@
   },
   "author": "Julien Ledun <j.ledun@iosystems.fr>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jledun/webRadioPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jledun/webRadioPlayer/issues"
+  },
+  "homepage": "https://github.com/jledun/webRadioPlayer",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
