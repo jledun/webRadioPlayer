@@ -1,0 +1,6 @@
+.soundcloud-card {
+  max-width: 320px;
+  width: 100%;
+  flex: 1 1 auto;
+  margin-bottom: 20px;
+}

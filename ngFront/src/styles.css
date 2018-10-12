@@ -2,8 +2,15 @@
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body { height: 100%; }
+html, body { height: 100%; overflow: hidden; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+.mainContent {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 64px - 19px);
+  width: 100%;
+}
 
 .fill-space {
   flex: 1 1 auto;

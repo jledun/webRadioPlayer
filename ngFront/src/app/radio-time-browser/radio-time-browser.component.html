@@ -1,0 +1,12 @@
+<mat-card *ngIf="!loading && browsed.head && browsed.head.title">
+
+  <span *ngFor="let h of history; index as i">
+    <span> > </span>
+    <button mat-button (click)="goto(i)">{{h.title}}</button>
+  </span>
+  
+  <app-radio-time-browser-item
+    [browsed]="browsed"
+    (browse)="browse($event)"></app-radio-time-browser-item>
+
+</mat-card>

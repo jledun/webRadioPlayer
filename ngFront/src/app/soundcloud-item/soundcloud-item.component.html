@@ -1,0 +1,24 @@
+<ng-container *ngIf="soundcloudItem.kind === 'track'">
+  <mat-card class="full-size">
+    <mat-card-header>
+      <mat-card-title>{{soundcloudItem.title}}</mat-card-title>
+      <mat-card-subtitle>par {{soundcloudItem.user.username}}</mat-card-subtitle>
+      <img mat-card-avatar src="{{soundcloudItem.user.avatar_url}}" alt="{{soundcloudItem.user.username}}">
+    </mat-card-header>
+    <img mat-card-image src="{{soundcloudItem.artwork_url}}" alt="Aucune image à afficher" *ngIf="soundcloudItem.artwork_url">
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Genre : {{soundcloudItem.genre || 'Non défini'}}</mat-list-item>
+        <mat-list-item>Créé le : {{soundcloudItem.created_at | date:'d/M/yyyy'}}</mat-list-item>
+        <mat-list-item>Dernière modification le : {{soundcloudItem.last_modified | date:'d/M/yyyy'}}</mat-list-item>
+        <mat-list-item>Durée : {{soundcloudItem.duration | date:'H:mm:ss':'+0'}}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <div fxLayout="row nowrap" fxLayoutAlign="space-between start" fxLayoutGap="5px">
+        <app-web-radio-server-play-button [url]="soundcloudItem.wrUrl"></app-web-radio-server-play-button>
+        <app-web-radio-browser-player-button [url]="soundcloudItem.wrUrl"></app-web-radio-browser-player-button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

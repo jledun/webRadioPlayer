@@ -1,40 +1,49 @@
-<mat-toolbar>
-  <span fxShow.lt-sm="false">{{title}}</span>
-  <button mat-button (click)="createUrl()" class="toolbar-button">
-    <mat-icon>add</mat-icon>
-    <span>Ajouter</span>
-  </button>
-  <span fxShow.lt-sm="false" *ngIf="displayTitle()" class="fill-space"></span>
-  <span *ngIf="displayTitle()">
-     {{mPlayer.status.url.name}}
-  </span>
-  <span class="fill-space"></span>
-  <button mat-mini-fab (click)="volumeDown()" class="toolbar-button">
-    <mat-icon>volume_down</mat-icon>
-  </button>
-  <!--mat-slider
-    max="100"
-    min="0"
-    step="1"
-    thumbLabel="true"
-    [value]="absVolume"
-    (change)="setVolume($event)">
-  </mat-slider-->
-  <button mat-mini-fab (click)="volumeUp()" class="toolbar-button">
-    <mat-icon>volume_up</mat-icon>
-  </button>
-</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav mode="push" [opened]="sideOpen" (closedStart)="sideOpen = false">
+    <mat-nav-list>
+      <mat-list-item *ngFor="let link of navButtons">
+        <a href="{{link.link}}"> {{link.title}}</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
 
-<ng-container *ngIf="mPlayer.url.length > 0">
-  <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="5px">
-    <div fxFlex="21%" fxFlex.lt-sm="95%" fxFlex.lt-md="45%" *ngFor="let u of mPlayer.url" class="spacer">
-      <app-web-radio-item
-        [url]="u"
-        (play)="play(u)"
-        (stop)="stop(u)"
-        (pause)="pause(u)"
-        ></app-web-radio-item>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="5px" class="mainTopBar">
+      <div fxFlex="1 0 auto">
+        <mat-toolbar> <!-- class="mainToolbar">-->
+          <button mat-icon-button (click)="sideOpen = !sideOpen">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span fxShow.lt-sm="false">{{title}}</span>
+          <button mat-button (click)="createUrl()" class="toolbar-button">
+            <mat-icon>add</mat-icon>
+            <span>Ajouter</span>
+          </button>
+          <span fxShow.lt-sm="false" *ngIf="displayTitle()" class="fill-space"></span>
+          <span *ngIf="displayTitle()">
+              {{mPlayer.status.url.name}}
+          </span>
+          <span class="fill-space"></span>
+          <button mat-mini-fab (click)="volumeDown()" class="toolbar-button">
+            <mat-icon>volume_down</mat-icon>
+          </button>
+          <button mat-mini-fab (click)="volumeUp()" class="toolbar-button">
+            <mat-icon>volume_up</mat-icon>
+          </button>
+        </mat-toolbar>
+      </div>
+
+      <div fxFlex="1 1 auto" class="mainContent">
+        <router-outlet></router-outlet>
+      </div>
+
+      <div fxFlex="1 0 auto" class="mainBottomBar">
+        <span class="fill-space"></span>
+        <span class="mat-body-1">Powered by Angular Material 6</span>
+      </div>
+
     </div>
-  </div>
-</ng-container>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
 

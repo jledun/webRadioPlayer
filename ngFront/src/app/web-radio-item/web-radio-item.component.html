@@ -23,15 +23,8 @@
   </mat-card-content>
   <mat-card-actions>
     <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
-      <button mat-mini-fab (click)="actionPlay()" *ngIf="url.status === 'stopped'">
-        <mat-icon>play_arrow</mat-icon>
-      </button>
-      <button mat-mini-fab (click)="actionStop()" *ngIf="url.status !== 'stopped'">
-        <mat-icon>stop</mat-icon>
-      </button>
-      <button mat-mini-fab (click)="playWebRadioInBrowser()" color="primary">
-        <mat-icon>launch</mat-icon>
-      </button>
+      <app-web-radio-server-play-button [url]="url"></app-web-radio-server-play-button>
+      <app-web-radio-browser-player-button [url]="url"></app-web-radio-browser-player-button>
     </div>
   </mat-card-actions>
 </mat-card>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { MplayerRemoteService } from './mplayer-remote.service';
 import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.component';
@@ -10,6 +11,13 @@ import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.com
 })
 export class AppComponent {
   title = 'Saballe Web Radio Player';
+  sideOpen: boolean = false;
+
+  navButtons: Array<any> = [
+    {title: 'Bibliothèque', link: 'library'},
+    {title: 'TuneIn', link: 'radiotime'},
+    {title: 'Soundcloud', link: 'soundcloud'}
+  ]
 
   absVolume: number = 0;
   setVolume(event) {
@@ -26,18 +34,20 @@ export class AppComponent {
 
   constructor(
     public dialog: MatDialog,
-    public mPlayer: MplayerRemoteService
-  ) {}
-
-  play(url: any) {
-    this.mPlayer.play(url);
+    public mPlayer: MplayerRemoteService,
+    private router: Router
+  ) {
+    this.router.events.subscribe(
+      data => {
+        if (
+          data instanceof RouterEvent && 
+          data.hasOwnProperty('url') && 
+          data.url !== ''
+        ) this.title = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).title;
+      }
+    )
   }
-  stop(url: any) {
-    this.mPlayer.stop(url);
-  }
-  pause(url: any) {
-    console.log('pause: ', url);
-  }
+  
   volumeUp() {
     this.mPlayer.volumeUp();
   }

@@ -1,0 +1,36 @@
+<mat-card>
+
+  <mat-card-header>
+    <form class="full-size" (submit)="search($event)" fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="5px">
+      <mat-form-field fxFlex="1 1 auto">
+        <input type="search" matInput placeholder="Saisir des mots clés" [formControl]="searchField">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <button mat-button fxFlex="0 0 auto">Chercher</button>
+    </form>
+  </mat-card-header>
+
+  <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="5px">
+  
+    <ng-container *ngIf="(!result.collection || result.collection.length <= 0) && !firstLoad">
+      <p class="mat-subheading-1">La recherche n'a fournie aucun résultat :-(</p>
+    </ng-container>
+
+    <ng-container *ngIf="result.collection && result.collection.length > 0">
+      <ng-container *ngFor="let res of result.collection; index as i">
+
+        <app-soundcloud-item [soundcloudItem]="res" class="soundcloud-card"></app-soundcloud-item>
+
+      </ng-container>
+
+    </ng-container>
+
+  </mat-card-content>
+
+  <mat-card-footer>
+    <div fxLayout="row nowrap" fxLayoutAlign="center center" *ngIf="result.next_href && result.next_href !== ''">
+      <button fxFlex="0 0 auto" mat-button (click)="moreResults(result.next_href)">Plus...</button>
+    </div>
+  </mat-card-footer>
+
+</mat-card>
