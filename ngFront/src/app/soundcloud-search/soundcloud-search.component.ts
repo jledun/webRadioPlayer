@@ -52,7 +52,6 @@ export class SoundcloudSearchComponent implements OnInit {
       data => {
         this.result = this.mapSearchData(data);
         this.firstLoad = false;
-        console.log(this.result);
       },
       err => {
         console.log(err);
@@ -68,7 +67,6 @@ export class SoundcloudSearchComponent implements OnInit {
       (data: any) => {
         data.collection = [].concat(this.result.collection, data.collection);
         this.result = this.mapSearchData(data);
-        console.log(this.result);
       }, err => {
         console.log(err);
         this.loading = false;
