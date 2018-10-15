@@ -7,6 +7,7 @@ import { RadioTimeBrowserService } from '../radio-time-browser.service';
   styleUrls: ['./radio-time-browser.component.css']
 })
 export class RadioTimeBrowserComponent implements OnInit {
+  public browsables: Array<any> = [];
   public browsed: any = {};
   public history: Array<any> = []
   loading: boolean = true;
@@ -18,27 +19,25 @@ export class RadioTimeBrowserComponent implements OnInit {
 
   ngOnInit() {
     if (!this.item.hasOwnProperty('body')) return this.browse();
-    this.browsed = this.checkDataTopic(this.item);
+    this.browsables.push(this.checkDataTopic(this.item));
     this.loading = false;
-    console.log(this.browsed);
+    console.log(this.browsables);
   }
 
   goto(i: number = 0) {
-    console.log(i);
-    while(this.history.length > i + 1) this.history.splice(i + 1, 1);
-    console.log(this.history[i].url);
-    this.browse(this.history[i].url);
+    while(this.history.length > (i + 1)) this.history.splice(i + 1, 1);
+    this.browse(this.history[i], true);
   }
 
   checkDataTopic(data: any = {}) {
     let tmp = Object.assign({}, data);
     // check topic or stations
-    let topics = 0, stations = 0, children = 0;
+    let result = {
+      topics: [],
+      audio: [],
+      pivot: []
+    };
     tmp.body.forEach(elm => {
-      topics = (elm.type === "link") ? topics + 1 : topics;
-      stations = (elm.type === "audio") ? stations + 1 : stations;
-      children = (elm.hasOwnProperty('children')) ? children + 1 : children;
-
       // conversion d'un children en radio-time-browser component
       if (elm.hasOwnProperty('children')) elm.children = Object.assign({}, {
         head: {title: elm.text, status: data.head.status}, 
@@ -51,20 +50,30 @@ export class RadioTimeBrowserComponent implements OnInit {
         url: ''.concat(elm.URL),
         status: 'stopped'
       };
+
+      // tri des éléments
+      if (elm.type === "link") result.topics.push(Object.assign({}, elm));
+      if (elm.type === "audio") result.audio.push(Object.assign({}, elm));
+      if (elm.type === "pivot") result.pivot.push(Object.assign({}, elm));
+      if (elm.hasOwnProperty('children')) result.pivot.push(Object.assign({}, elm));
     });
-    tmp.type = (topics === tmp.body.length) ? "topics" : 
-      (stations === tmp.body.length) ? "audio" : 
-      (children === tmp.body.length) ? "card" : "mixed";
-    return tmp;
+    return Object.keys(result).map(key => {
+      if (result[key].length <= 0) return;
+      return Object.assign({}, {
+        head: Object.assign({}, data.head),
+        body: [].concat(result[key]),
+        type: key
+      });
+    }).filter(list => typeof list !== "undefined");
   }
 
-  browse(item: any = {URL: ''}) {
+  browse(item: any = {URL: ''}, dontpush: boolean = false) {
     this.loading = true;
     this.radioBrowser.browse(item.URL || '').subscribe(
       data => {
-        this.browsed = this.checkDataTopic(data);
-        this.history.push(Object.assign({}, {url: item.URL, title: this.browsed.head.title, browsed: Object.assign({}, this.browsed)}));
-        console.log(this.browsed);
+        this.browsables = this.checkDataTopic(data);
+        if (!dontpush) this.history.push(Object.assign({}, {URL: item.URL, title: this.browsables[0].head.title}));
+        console.log(this.browsables);
       }, err => {
         console.log(err);
       }, () => {

@@ -17,6 +17,6 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="browsed.type === 'card'">
+<ng-container *ngIf="browsed.type === 'card' || browsed.type === 'pivot'">
   <app-radio-time-browser-item *ngFor="let b of browsed.body" [browsed]="b.children"></app-radio-time-browser-item>
 </ng-container>

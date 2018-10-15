@@ -1,4 +1,4 @@
-<mat-card *ngIf="!loading && browsed.head && browsed.head.title">
+<mat-card *ngIf="!loading && browsables.length > 0">
 
   <span *ngFor="let h of history; index as i">
     <span> > </span>
@@ -6,7 +6,8 @@
   </span>
   
   <app-radio-time-browser-item
-    [browsed]="browsed"
+    *ngFor="let b of browsables"
+    [browsed]="b"
     (browse)="browse($event)"></app-radio-time-browser-item>
 
 </mat-card>
