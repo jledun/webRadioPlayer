@@ -1,3 +1,9 @@
+<mat-card *ngIf="!loading && browsables.length <= 0">
+  
+  <p *ngIf="error !== ''">{{error}}</p>
+
+</mat-card>
+
 <mat-card *ngIf="!loading && browsables.length > 0">
 
   <span *ngFor="let h of history; index as i">

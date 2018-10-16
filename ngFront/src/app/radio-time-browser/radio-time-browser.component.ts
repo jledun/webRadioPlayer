@@ -8,6 +8,7 @@ import { RadioTimeBrowserService } from '../radio-time-browser.service';
 })
 export class RadioTimeBrowserComponent implements OnInit {
   public browsables: Array<any> = [];
+  public error: string = '';
   public browsed: any = {};
   public history: Array<any> = []
   loading: boolean = true;
@@ -90,8 +91,10 @@ export class RadioTimeBrowserComponent implements OnInit {
         this.browsables = this.checkDataTopic(data);
         if (!dontpush) this.history.push(Object.assign({}, {URL: item.URL, title: this.browsables[0].head.title}));
       }, err => {
-        console.log(err);
+        this.error = err.name + " - " + err.statusText
+        this.loading = false;
       }, () => {
+        this.error = '';
         this.loading = false;
       }
     );
