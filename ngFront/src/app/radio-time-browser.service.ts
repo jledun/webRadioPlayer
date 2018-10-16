@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +43,10 @@ export class RadioTimeBrowserService {
   public browse(url: string = '', opt: any = {}): any {
     const localUrl = url || this.browseUrl;
     return this.http.jsonp(localUrl.concat(this.mergeUrlParams(localUrl, opt)), 'callback')
+  }
+  public browseRadioTimeUrl(url: string = '') {
+    if (url === '') return Observable.throw('URL is empty');
+    return this.http.jsonp(url.concat(this.mergeUrlParams(url, {})), 'callback');
   }
 
 }

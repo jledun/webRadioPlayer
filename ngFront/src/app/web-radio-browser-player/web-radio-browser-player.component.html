@@ -5,8 +5,10 @@
     fxLayoutAlign="center center"
     *ngIf="data.url && data.url !== ''">
     <audio
+      #audioPlayer
       controls
       autoplay
+      loop
       [src]="data.url"
       ></audio>
   </div>
@@ -14,3 +16,4 @@
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Fermer</button>
 </div>
+

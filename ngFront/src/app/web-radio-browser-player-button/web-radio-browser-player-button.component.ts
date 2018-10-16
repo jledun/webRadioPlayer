@@ -11,7 +11,7 @@ export class WebRadioBrowserPlayerButtonComponent {
   @Input() url: any = {};
   
   constructor(
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) { }
 
   playWebRadioInBrowser() {

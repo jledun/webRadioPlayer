@@ -20,7 +20,8 @@ import {
   MatSliderModule,
   MatSnackBarModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -92,7 +93,8 @@ import { RadioTimeChildElementComponent } from './radio-time-child-element/radio
     MatSliderModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   entryComponents: [
     WebRadioEditorComponent,

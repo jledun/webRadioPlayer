@@ -31,7 +31,7 @@ export class RadioTimeBrowserComponent implements OnInit {
   createAudioElement(elm: any) {
     return Object.assign({}, elm, {wrUrl: {
       name: ''.concat(elm.text),
-      url: ''.concat(elm.URL),
+      radioTimeUrl: ''.concat(elm.URL),
       status: 'stopped'
     }});
   }

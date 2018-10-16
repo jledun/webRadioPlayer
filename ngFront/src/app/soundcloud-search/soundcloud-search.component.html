@@ -1,36 +1,51 @@
-<mat-card>
+<div fxLayout="column nowrap" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <mat-card class="full-size">
 
-  <mat-card-header>
-    <form class="full-size" (submit)="search($event)" fxLayout="row wrap" fxLayoutAlign="stretch center" fxLayoutGap="5px">
-      <mat-form-field fxFlex="1 1 auto">
-        <input type="search" matInput placeholder="Saisir des mots clés" [formControl]="searchField">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-      <button mat-button fxFlex="0 0 auto">Chercher</button>
-    </form>
-  </mat-card-header>
+    <mat-card-header>
+      <form class="full-size" (submit)="search($event)" fxLayout="row wrap" fxLayoutAlign="stretch center" fxLayoutGap="5px">
+        <mat-form-field fxFlex="1 1 auto">
+          <input type="search" matInput placeholder="Saisir des mots clés" [formControl]="searchField">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button mat-button fxFlex="0 0 auto">Chercher</button>
+      </form>
+    </mat-card-header>
 
-  <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="5px">
-  
-    <ng-container *ngIf="(!result.collection || result.collection.length <= 0) && !firstLoad">
-      <p class="mat-subheading-1">La recherche n'a fournie aucun résultat :-(</p>
-    </ng-container>
-
-    <ng-container *ngIf="result.collection && result.collection.length > 0">
-      <ng-container *ngFor="let res of result.collection; index as i">
-
-        <app-soundcloud-item [soundcloudItem]="res" class="soundcloud-card"></app-soundcloud-item>
-
+    <mat-card-content fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="5px">
+    
+      <ng-container *ngIf="(!result.collection || result.collection.length <= 0) && !firstLoad">
+        <p class="mat-subheading-1">La recherche n'a fournie aucun résultat :-(</p>
       </ng-container>
 
-    </ng-container>
+      <mat-nav-list *ngIf="result.collection && result.collection.length > 0" class="full-size">
+        <mat-list-item 
+          matTooltip="Durée : {{res.duration | date:'H:mm:ss':'+0'}} - Créé le : {{res.created_at | date:'d/M/yyyy'}} - Dernière modification le : {{res.last_modified | date:'d/M/yyyy'}}"
+          *ngFor="let res of result.collection; index as i" 
+          disableRipple="true">
 
-  </mat-card-content>
+          <img mat-list-avatar 
+            src="{{res.user.avatar_url}}" 
+            alt="{{res.user.username}}">
+          <h4 mat-line>{{res.title}}</h4>
+          <p mat-line>par {{res.user.username}}</p>
+          <p mat-line>Genre : {{res.genre || 'Non défini'}}</p>
+          <span class="fill-space"></span>
+          <span fxLayout="row nowrap" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+            <app-web-radio-server-play-button [url]="res.wrUrl"></app-web-radio-server-play-button>
+            <app-web-radio-browser-player-button [url]="res.wrUrl"></app-web-radio-browser-player-button>
+          </span>
 
-  <mat-card-footer>
-    <div fxLayout="row nowrap" fxLayoutAlign="center center" *ngIf="result.next_href && result.next_href !== ''">
-      <button fxFlex="0 0 auto" mat-button (click)="moreResults(result.next_href)">Plus...</button>
-    </div>
-  </mat-card-footer>
+        </mat-list-item>
 
-</mat-card>
+      </mat-nav-list>
+
+    </mat-card-content>
+
+    <mat-card-footer>
+      <div fxLayout="row nowrap" fxLayoutAlign="center center" *ngIf="result.next_href && result.next_href !== ''">
+        <button fxFlex="0 0 auto" mat-button (click)="moreResults(result.next_href)">Plus...</button>
+      </div>
+    </mat-card-footer>
+
+  </mat-card>
+</div>

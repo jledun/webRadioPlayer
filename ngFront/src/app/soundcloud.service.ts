@@ -36,7 +36,7 @@ export class SoundcloudService {
   }
 
   searchTrack(query: string = '') {
-    return this.scQuery('tracks', {q: query});
+    return this.scQuery('tracks', (query) ? {q: query} : null);
   }
   navigateGenres(query: string = '') {
     return this.scQuery('tracks', {genres: query});
