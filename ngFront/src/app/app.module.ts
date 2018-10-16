@@ -8,6 +8,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatDividerModule,
   MatExpansionModule,
   MatIconModule,
   MatInputModule,
@@ -45,6 +46,7 @@ import { SoundcloudBrowserComponent } from './soundcloud-browser/soundcloud-brow
 import { SoundcloudSearchComponent } from './soundcloud-search/soundcloud-search.component';
 import { WebRadioServerPlayButtonComponent } from './web-radio-server-play-button/web-radio-server-play-button.component';
 import { SoundcloudItemComponent } from './soundcloud-item/soundcloud-item.component';
+import { RadioTimeChildElementComponent } from './radio-time-child-element/radio-time-child-element.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { SoundcloudItemComponent } from './soundcloud-item/soundcloud-item.compo
     SoundcloudBrowserComponent,
     SoundcloudSearchComponent,
     WebRadioServerPlayButtonComponent,
-    SoundcloudItemComponent
+    SoundcloudItemComponent,
+    RadioTimeChildElementComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ import { SoundcloudItemComponent } from './soundcloud-item/soundcloud-item.compo
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
+    MatDividerModule,
     MatExpansionModule,
     MatIconModule,
     MatInputModule,

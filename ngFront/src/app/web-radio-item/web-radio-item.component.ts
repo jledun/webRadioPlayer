@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MplayerRemoteService } from '../mplayer-remote.service';
 import { WebRadioEditorComponent } from '../web-radio-editor/web-radio-editor.component';
@@ -10,9 +10,6 @@ import { WebRadioEditorComponent } from '../web-radio-editor/web-radio-editor.co
 })
 export class WebRadioItemComponent {
   @Input() url: any = {};
-  @Output() play: EventEmitter<any> = new EventEmitter();
-  @Output() stop: EventEmitter<any> = new EventEmitter();
-  @Output() pause: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public dialog: MatDialog,

@@ -11,6 +11,7 @@ export class RadioTimeBrowserItemComponent {
   @Input() browsed: any = {}
   @Output() browse: EventEmitter<any> = new EventEmitter();
   go(item) {
+    if (item.type !=="link") return;
     this.browse.emit(item);
   }
 
@@ -19,23 +20,5 @@ export class RadioTimeBrowserItemComponent {
   constructor(
     private radioBrowser: RadioTimeBrowserService
   ) { }
-
-  play(item) {
-    console.log("play item");
-    console.log(item);
-    this.radioBrowser.browse(item.url).subscribe(
-      data => console.log(data),
-      err => console.log(err),
-      () => {}
-    )
-  }
-  stop(item) {
-    console.log("stop item");
-    console.log(item);
-  }
-  pause(item) {
-    console.log('pause item');
-    console.log(item);
-  }
 
 }
