@@ -1,12 +1,13 @@
-<ng-container *ngIf="mPlayer.url.length > 0">
-    <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="5px">
-      <div fxFlex="21%" fxFlex.lt-sm="95%" fxFlex.lt-md="45%" *ngFor="let u of mPlayer.url" class="spacer">
-        <app-web-radio-item
-          [url]="u"
-          (play)="play(u)"
-          (stop)="stop(u)"
-          (pause)="pause(u)"
-          ></app-web-radio-item>
-      </div>
+<div *ngIf="mPlayer.url.length > 0">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutGap="5px">
+    <div fxFlex="21%" fxFlex.lt-sm="95%" fxFlex.sm="45%" *ngFor="let u of mPlayer.url" class="spacer">
+      <app-web-radio-item
+        [url]="u"
+        (play)="play(u)"
+        (stop)="stop(u)"
+        (pause)="pause(u)"
+        ></app-web-radio-item>
     </div>
-  </ng-container>
+  </div>
+</div>
+

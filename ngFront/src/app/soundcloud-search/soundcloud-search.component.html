@@ -1,5 +1,5 @@
 <div fxLayout="column nowrap" fxLayoutAlign="start center" fxLayoutGap="5px">
-  <mat-card class="full-size">
+  <mat-card>
 
     <mat-card-header>
       <form class="full-size" (submit)="search($event)" fxLayout="row wrap" fxLayoutAlign="stretch center" fxLayoutGap="5px">
@@ -17,8 +17,43 @@
         <p class="mat-subheading-1">La recherche n'a fournie aucun résultat :-(</p>
       </ng-container>
 
-      <mat-nav-list *ngIf="result.collection && result.collection.length > 0" class="full-size">
+      <div
+        fxShow.gt-xs="false"
+        *ngIf="result.collection && result.collection.length > 0">
+        <ng-container
+          *ngFor="let res of result.collection; index as i">
+          <mat-card class="soundcloud-card">
+            <mat-card-header>
+              <mat-card-title>{{res.title}}</mat-card-title>
+              <mat-card-subtitle>par {{res.user.username}}</mat-card-subtitle>
+              <img mat-card-avatar src="{{res.user.avatar_url}}">
+            </mat-card-header>
+            <mat-card-content>
+              <p>Genre : {{res.genre || 'non défini'}}</p>
+              <p>Durée : {{res.duration | date:'H:mm:ss':'+0'}}</p>
+              <p>Créé le : {{res.created_at | date:'d/M/yyyy'}}</p>
+              <p>Modifié le : {{res.last_modified | date:'d/M/yyyy'}}</p>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <app-web-radio-server-play-button 
+                class="soundcloud-button"
+                [url]="res.wrUrl">
+              </app-web-radio-server-play-button>
+              <app-web-radio-browser-player-button
+                class="soundcloud-button"
+                [url]="res.wrUrl">
+              </app-web-radio-browser-player-button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+      </div>
+
+      <mat-list 
+        fxShow.lt-sm="false"
+        *ngIf="result.collection && result.collection.length > 0" 
+        class="full-size">
         <mat-list-item 
+          style="flex: 1 1 auto;"
           matTooltip="Durée : {{res.duration | date:'H:mm:ss':'+0'}} - Créé le : {{res.created_at | date:'d/M/yyyy'}} - Dernière modification le : {{res.last_modified | date:'d/M/yyyy'}}"
           *ngFor="let res of result.collection; index as i" 
           disableRipple="true">
@@ -37,7 +72,7 @@
 
         </mat-list-item>
 
-      </mat-nav-list>
+      </mat-list>
 
     </mat-card-content>
 

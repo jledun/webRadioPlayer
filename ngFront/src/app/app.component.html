@@ -1,11 +1,21 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="push" [opened]="sideOpen" (closedStart)="sideOpen = false">
+  <mat-sidenav 
+    style="min-width: 240px;"
+    mode="over" 
+    [opened]="sideOpen" 
+    (closedStart)="sideOpen = false">
     <mat-nav-list>
+      <mat-list-item>
+        <a href="https://iosystems.fr" target="_blank">
+          <img src="assets/iosystems_bootstrap.png" width="240px">
+        </a>
+      </mat-list-item>
       <mat-list-item *ngFor="let link of navButtons">
         <a href="{{link.link}}"> {{link.title}}</a>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="5px" class="mainTopBar">
@@ -14,6 +24,12 @@
           <button mat-icon-button (click)="sideOpen = !sideOpen">
             <mat-icon>menu</mat-icon>
           </button>
+          <img *ngIf="imgUrl !== '' && href === ''" src="{{imgUrl}}">
+          <span *ngIf="imgUrl !== '' && href !== ''">
+            <a href="{{href}}" target="_blank">
+              <img src="{{imgUrl}}">
+            </a>
+          </span>
           <span fxShow.lt-sm="false">{{title}}</span>
           <button mat-button (click)="createUrl()" class="toolbar-button">
             <mat-icon>add</mat-icon>

@@ -11,12 +11,14 @@ import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.com
 })
 export class AppComponent {
   title = 'Saballe Web Radio Player';
+  imgUrl = '';
+  href = '';
   sideOpen: boolean = false;
 
   navButtons: Array<any> = [
-    {title: 'Bibliothèque', link: 'library'},
-    {title: 'TuneIn', link: 'radiotime'},
-    {title: 'Soundcloud', link: 'soundcloud'}
+    {title: 'Bibliothèque', link: 'library', img: '', href: ""},
+    {title: 'TuneIn', link: 'radiotime', img: '', href: ''},
+    {title: 'Soundcloud', link: 'soundcloud', img: 'assets/soundcloud-logo.png', href: 'https://soundcloud.com/'}
   ]
 
   absVolume: number = 0;
@@ -43,7 +45,11 @@ export class AppComponent {
           data instanceof RouterEvent && 
           data.hasOwnProperty('url') && 
           data.url !== ''
-        ) this.title = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).title;
+        ) {
+          this.title = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).title;
+          this.imgUrl = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).img;
+          this.href = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).href;
+        }
       }
     )
   }

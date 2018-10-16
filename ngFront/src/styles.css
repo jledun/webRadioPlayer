@@ -7,7 +7,7 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
 
 .mainContent {
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
   height: calc(100vh - 64px - 19px);
   width: 100%;
 }
