@@ -18,9 +18,9 @@ export class WebRadioBrowserPlayerComponent {
       () => {
         if (this.data.hasOwnProperty('url')) return;
         if (this.data.hasOwnProperty('radioTimeUrl')) {
-          this.rt.browseRadioTimeUrl(this.data.radioTimeUrl).subscribe(
+          this.rt.browseRadioTimeUrl(this.data).subscribe(
             data => {
-              console.log(data);
+              this.data = Object.assign({}, this.data, data);
             }, err => {
               console.log(err);
             }, () => {}

@@ -1,10 +1,35 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Rechercher dans TuneIn
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-  </mat-card-content>
-</mat-card>
+<div fxLayout="column nowrap" fxLayoutAlign="start center" fxLayoutGap="5px" class="full-size">
+  <mat-card class="radiotime-search-card">
+    <mat-card-header>
+      <form class="full-size" (submit)="search($event)" fxLayout="row wrap" fxLayoutAlign="stretch center" fxLayoutGap="5px">
+        <mat-form-field fxFlex="1 1 auto">
+          <input type="search" matInput placeholder="Saisir des mots clés" [formControl]="searchField">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button mat-button fxFlex="0 0 auto">Chercher</button>
+      </form>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="error !== ''">
+        <p *ngIf="error !== ''">{{error}}</p>
+      </ng-container>
+
+      <ng-container *ngIf="error === '' && result && result.head && result.head.title">
+        <span fxLayout="row nowrap" fxLayoutAlign="start center" fxLayoutGap="5px">
+          <p>{{result.head.title}}</p>
+          <button mat-icon-button (click)="clearSearch()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+
+        <app-radio-time-list 
+          (browse)="browse($event)"
+          [radioTimeList]="result">
+        </app-radio-time-list>
+
+      </ng-container>
+
+    </mat-card-content>
+  </mat-card>
+</div>
 

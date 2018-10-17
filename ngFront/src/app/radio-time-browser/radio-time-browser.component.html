@@ -1,19 +1,23 @@
-<mat-card *ngIf="!loading && browsables.length <= 0">
+<mat-card *ngIf="!loading && error !== ''" class="full-size">
   
   <p *ngIf="error !== ''">{{error}}</p>
 
 </mat-card>
 
-<mat-card *ngIf="!loading && browsables.length > 0">
+<mat-card *ngIf="!loading && error === '' && result && result.head && result.head.title" class="full-size">
 
   <span *ngFor="let h of history; index as i">
     <span> > </span>
     <button mat-button (click)="goto(i)">{{h.title}}</button>
   </span>
 
-  <app-radio-time-browser-item
-    *ngFor="let b of browsables"
-    [browsed]="b"
-    (browse)="browse($event)"></app-radio-time-browser-item>
+  <ng-container>
+
+    <app-radio-time-list 
+      (browse)="browse($event)"
+      [radioTimeList]="result">
+    </app-radio-time-list>
+
+  </ng-container>
 
 </mat-card>

@@ -1,0 +1,63 @@
+<div *ngIf="radioTimeList && radioTimeList.head && radioTimeList.head.title">
+  <mat-nav-list>
+
+    <mat-list-item
+      *ngFor="let item of rtList.pivot">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{item.text}}</mat-card-title>
+          <mat-card-subtitle>{{item.subtext || ''}}</mat-card-subtitle>
+          <ng-container *ngIf="item.image && item.image !== ''">
+            <img mat-card-avatar src="{{item.image}}">
+          </ng-container>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-nav-list>
+            <mat-list-item
+              *ngFor="let child of item.children">
+              <ng-container *ngIf="child.image && child.image !== ''">
+                <img mat-list-avatar src="{{child.image}}">
+              </ng-container>
+              <h3 mat-line>{{child.text}}</h3>
+              <p mat-line>{{child.subtext || ''}}</p>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-list-item>
+
+    <mat-list-item
+      *ngFor="let item of rtList.link"
+      (click)="go(item)">
+      <ng-container *ngIf="item.image && item.image !== ''">
+        <img mat-list-avatar src="{{item.image}}">
+      </ng-container>
+      <h3 mat-line>{{item.text}}</h3>
+      <p mat-line>{{item.subtext}}</p>
+      <span class="fill-space"></span>
+      <p>></p>
+    </mat-list-item>
+
+    <mat-list-item
+      *ngFor="let item of rtList.audio">
+      <ng-container *ngIf="item.image && item.image !== ''">
+        <img mat-list-avatar src="{{item.image}}">
+      </ng-container>
+      <h3 mat-line>{{item.text}}</h3>
+      <p mat-line>{{item.subtext}}</p>
+      <span class="fill-space"></span>
+      <span fxLayout="row nowrap" fxLayoutAlign="end center" fxLayoutGap="15px">
+        <app-web-radio-server-play-button
+          fxFlex="0 0 auto"
+          [url]="item">
+        </app-web-radio-server-play-button>
+        <app-web-radio-browser-player-button
+          fxFlex="0 0 auto"
+          [url]="item">
+        </app-web-radio-browser-player-button>
+      </span>
+    </mat-list-item>
+
+  </mat-nav-list>
+
+</div>

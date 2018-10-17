@@ -18,6 +18,7 @@ export class AppComponent {
   navButtons: Array<any> = [
     {title: 'Bibliothèque', link: 'library', img: '', href: ""},
     {title: 'TuneIn', link: 'radiotime', img: '', href: ''},
+    {title: 'Radio Browser', link: 'radiotime', img: '', href: 'http://www.radio-browser.info'},
     {title: 'Soundcloud', link: 'soundcloud', img: 'assets/soundcloud-logo.png', href: 'https://soundcloud.com/'}
   ]
 

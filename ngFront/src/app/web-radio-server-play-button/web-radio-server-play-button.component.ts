@@ -15,30 +15,23 @@ export class WebRadioServerPlayButtonComponent  {
     private rt: RadioTimeBrowserService
   ) { }
 
+  playRadioTimeUrl() {
+    this.rt.browseRadioTimeUrl(this.url).subscribe(
+      data => {
+        this.url = Object.assign({}, this.url, data);
+        this.mp.play(this.url);
+      }, err => {
+        console.log(err);
+      }, () => {}
+    );
+  }
   play() {
     if (this.url.hasOwnProperty('url')) return this.mp.play(this.url);
-    if (this.url.hasOwnProperty('radioTimeUrl')) {
-      this.rt.browseRadioTimeUrl(this.url.radioTimeUrl).subscribe(
-        data => {
-          console.log(data);
-        }, err => {
-          console.log(err);
-        }, () => {}
-      );
-    }
+    if (this.url.hasOwnProperty('radioTimeUrl')) return this.playRadioTimeUrl();
   }
 
   stop() {
-    if (this.url.hasOwnProperty('url')) return this.mp.stop(this.url);
-    if (this.url.hasOwnProperty('radioTimeUrl')) {
-      this.rt.browseRadioTimeUrl(this.url.radioTimeUrl).subscribe(
-        data => {
-          console.log(data);
-        }, err => {
-          console.log(err);
-        }, () => {}
-      );
-    }
+    this.mp.stop(this.url);
   }
 
 }

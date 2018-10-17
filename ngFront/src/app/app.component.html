@@ -30,7 +30,8 @@
               <img src="{{imgUrl}}">
             </a>
           </span>
-          <span fxShow.lt-sm="false">{{title}}</span>
+          <a *ngIf="imgUrl === '' && href !== ''" href="{{href}}" target="_blank">{{title}}</a>
+          <span *ngIf="imgUrl === '' && href === ''">{{title}}</span>
           <button mat-button (click)="createUrl()" class="toolbar-button">
             <mat-icon>add</mat-icon>
             <span>Ajouter</span>

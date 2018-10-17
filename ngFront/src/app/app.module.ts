@@ -48,6 +48,7 @@ import { SoundcloudSearchComponent } from './soundcloud-search/soundcloud-search
 import { WebRadioServerPlayButtonComponent } from './web-radio-server-play-button/web-radio-server-play-button.component';
 import { SoundcloudItemComponent } from './soundcloud-item/soundcloud-item.component';
 import { RadioTimeChildElementComponent } from './radio-time-child-element/radio-time-child-element.component';
+import { RadioTimeListComponent } from './radio-time-list/radio-time-list.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { RadioTimeChildElementComponent } from './radio-time-child-element/radio
     SoundcloudSearchComponent,
     WebRadioServerPlayButtonComponent,
     SoundcloudItemComponent,
-    RadioTimeChildElementComponent
+    RadioTimeChildElementComponent,
+    RadioTimeListComponent
   ],
   imports: [
     BrowserModule,
