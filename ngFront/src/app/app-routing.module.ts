@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WebRadioLibraryComponent } from './web-radio-library/web-radio-library.component';
-import { RadioTimeComponent } from './radio-time/radio-time.component';
 import { SoundcloudComponent } from './soundcloud/soundcloud.component';
+import { CommunityRadioBrowserComponent } from './community-radio-browser/community-radio-browser.component';
 
 const routes: Routes = [
   {path: 'library', component: WebRadioLibraryComponent},
-  {path: 'radiotime', component: RadioTimeComponent},
+  {path: 'radiobrowser', component: CommunityRadioBrowserComponent},
   {path: 'soundcloud', component: SoundcloudComponent},
   {path: '', redirectTo: 'library', pathMatch: 'full' }
 ];

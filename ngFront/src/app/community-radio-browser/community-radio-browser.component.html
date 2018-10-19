@@ -1,0 +1,182 @@
+<div fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+  <mat-card fxFlex="100">
+    <mat-card-content>
+        <!-- OUTIL DE RECHERCHE ET DE FILTRAGE -->
+        <mat-card>
+            <div fxLayout="row wrap" fxLayoutAlign="stretch start" fxLayoutGap="15px">
+
+              <div [formGroup]="uiTool" 
+                fxFlex="0 0 auto"
+                fxLayout="column nowrap" 
+                fxLayoutAlign="center stretch" 
+                fxLayoutGap="15px">
+                
+                <!-- top click -->
+                <button fxFlex="0 0 auto"
+                  mat-flat-button 
+                  color="primary" 
+                  (click)="getTopClickStations()">
+                  Les plus jouées
+                </button>
+
+                <!-- top vote -->
+                <button fxFlex="0 0 auto"
+                  mat-flat-button 
+                  color="primary" 
+                  (click)="getTopVoteStations()">
+                  Les mieux notées
+                </button>
+
+                <!-- last change -->
+                <button fxFlex="0 0 auto"
+                  mat-flat-button 
+                  color="primary" 
+                  (click)="getLastChangedStations()">
+                  Les plus récentes
+                </button>
+
+              </div>
+
+              <div [formGroup]="uiTool" 
+                fxFlex="1 0 auto"
+                fxLayout="column nowrap" 
+                fxLayoutAlign="center stretch" 
+                fxLayoutGap="15px">
+
+                <!-- NAME SELECTOR -->
+                <mat-form-field fxFlex="1 0 100%">
+                  <input type="text" 
+                    matInput 
+                    placeholder="nom de station" aria-label="nom de station" 
+                    formControlName="name">
+                </mat-form-field>
+                <!-- NAME SELECTOR -->
+
+                <!-- TAG SELECTOR -->
+                <mat-form-field *ngIf="tagList.length > 0" fxFlex="1 0 100%">
+                  <mat-chip-list #tagChipList>
+                    <mat-chip
+                      *ngFor="let tag of selectedTagList"
+                      selectable="false"
+                      removable="true"
+                      (removed)="removeTag(tag)">
+                      {{tag.name}}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input
+                      placeholder="Sélectionner des tags"
+                      #tagInput
+                      formControlName="tags"
+                      [matAutocomplete]="tagComplete"
+                      [matChipInputFor]="tagChipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      matChipInputAddOnBlur="true"
+                      (matChipInputTokenEnd)="addTag($event)">
+                  </mat-chip-list>
+                  <mat-autocomplete #tagComplete="matAutocomplete" (optionSelected)="selectedTag($event)">
+                    <mat-option *ngFor="let tag of filteredTagList | async" [value]="tag.name">
+                      {{ tag.name }} ({{tag.stationcount}})
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field *ngIf="tagList.length <= 0" fxFlex="1 0 100%">
+                  <input type="text" 
+                    matInput 
+                    placeholder="Sélectionner des tags"
+                    disabled="true"
+                    aria-label="Sélectionner des tags">
+                </mat-form-field>
+                <!-- TAG SELECTOR -->
+  
+              </div>
+              <div [formGroup]="uiTool" 
+                fxShow="true"
+                fxShow.lt-md="false"
+                fxFlex="0 0 auto"
+                fxLayout="column nowrap" 
+                fxLayoutAlign="center stretch" 
+                fxLayoutGap="15px">                
+
+                <!-- COUNTRY SELECTOR -->
+                <mat-form-field *ngIf="countryList.length > 0" fxFlex="0 0 100%">
+                  <input type="text" 
+                    matInput 
+                    placeholder="Pays" aria-label="Pays" 
+                    [matAutocomplete]="countryComplete" 
+                    formControlName="country">
+                  <mat-autocomplete #countryComplete="matAutocomplete">
+                    <mat-option *ngFor="let country of filteredCountryList | async" [value]="country.name">
+                      {{ country.name }} ({{country.stationcount}})
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field *ngIf="countryList.length <= 0" fxFlex="0 0 100%">
+                  <input type="text" 
+                    matInput 
+                    placeholder="Pays"
+                    disabled="true"
+                    aria-label="Pays">
+                </mat-form-field>
+                <!-- COUNTRY SELECTOR -->
+
+                <!-- REGION SELECTOR -->
+                <mat-form-field *ngIf="regionList.length > 0" fxFlex="0 0 100%">
+                  <input type="text" 
+                    matInput 
+                    placeholder="Région / état"
+                    aria-label="Région / état"
+                    [matAutocomplete]="regionComplete" 
+                    formControlName="region">
+                  <mat-autocomplete #regionComplete="matAutocomplete">
+                    <mat-option *ngFor="let region of filteredRegionList | async" [value]="region.name">
+                      {{ region.name }} ({{region.stationcount}})
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field *ngIf="regionList.length <= 0" fxFlex="0 0 100%">
+                  <input type="text" 
+                    matInput 
+                    placeholder="Région / état"
+                    disabled="true"
+                    aria-label="Région / état">
+                </mat-form-field>
+                <!-- REGION SELECTOR -->
+
+              </div>
+              <div [formGroup]="uiTool" 
+                fxShow="true"
+                fxShow.lt-md="false"
+                fxFlex="0 0 auto"
+                fxLayout="column nowrap" 
+                fxLayoutAlign="center stretch" 
+                fxLayoutGap="15px">  
+
+                <!-- ordre de tri -->
+                <mat-radio-group fxFlex="0 0 auto"
+                  fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="15px"
+                  formControlName="order">
+                  <p fxFlex="1 0 auto">Trier par</p>
+                  <mat-radio-button fxFlex="1 0 auto" value="name">Nom</mat-radio-button>
+                  <mat-radio-button fxFlex="1 0 auto" value="vote">Votes</mat-radio-button>
+                  <mat-radio-button fxFlex="1 0 auto" value="click">Clicks</mat-radio-button>
+                </mat-radio-group>
+
+              </div>
+            </div>
+        </mat-card>
+        
+        <!-- AFFICHAGE DU RÉSULTAT -->
+        <mat-card>
+          <mat-list *ngIf="stationList.length > 0">
+            <mat-list-item
+              *ngFor="let station of stationList">
+              {{station.name}}
+            </mat-list-item>
+          </mat-list>
+          <mat-card-actions align="center">
+            <button mat-button *ngIf="stationList.length >= (_filter.limit + _filter.offset)" (click)="moreResults()">Plus</button>
+          </mat-card-actions>
+        </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

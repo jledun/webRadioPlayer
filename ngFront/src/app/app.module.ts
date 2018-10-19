@@ -5,8 +5,10 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
+  MatChipsModule,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
@@ -27,6 +29,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { StatusComponent } from './status/status.component';
 
 // web radio library
 import { WebRadioLibraryComponent } from './web-radio-library/web-radio-library.component';
@@ -34,21 +37,19 @@ import { WebRadioItemComponent } from './web-radio-item/web-radio-item.component
 import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.component';
 import { WebRadioBrowserPlayerComponent } from './web-radio-browser-player/web-radio-browser-player.component';
 import { WebRadioBrowserPlayerButtonComponent } from './web-radio-browser-player-button/web-radio-browser-player-button.component';
+import { WebRadioServerPlayButtonComponent } from './web-radio-server-play-button/web-radio-server-play-button.component';
 
-// radio time browser
-import { RadioTimeComponent } from './radio-time/radio-time.component';
-import { RadioTimeBrowserComponent } from './radio-time-browser/radio-time-browser.component';
-import { RadioTimeSearchEngineComponent } from './radio-time-search-engine/radio-time-search-engine.component';
-
-import { StatusComponent } from './status/status.component';
-import { RadioTimeBrowserItemComponent } from './radio-time-browser-item/radio-time-browser-item.component';
+// SoundCloud library
 import { SoundcloudComponent } from './soundcloud/soundcloud.component';
 import { SoundcloudBrowserComponent } from './soundcloud-browser/soundcloud-browser.component';
 import { SoundcloudSearchComponent } from './soundcloud-search/soundcloud-search.component';
-import { WebRadioServerPlayButtonComponent } from './web-radio-server-play-button/web-radio-server-play-button.component';
 import { SoundcloudItemComponent } from './soundcloud-item/soundcloud-item.component';
-import { RadioTimeChildElementComponent } from './radio-time-child-element/radio-time-child-element.component';
-import { RadioTimeListComponent } from './radio-time-list/radio-time-list.component';
+
+// Community Radio Browser
+import { CommunityRadioBrowserComponent } from './community-radio-browser/community-radio-browser.component';
+import { BrowserComponent } from './community-radio-browser/browser/browser.component';
+import { SearchEngineComponent } from './community-radio-browser/search-engine/search-engine.component';
+
 
 @NgModule({
   declarations: [
@@ -59,17 +60,14 @@ import { RadioTimeListComponent } from './radio-time-list/radio-time-list.compon
     WebRadioBrowserPlayerComponent,
     WebRadioBrowserPlayerButtonComponent,
     WebRadioLibraryComponent,
-    RadioTimeComponent,
-    RadioTimeBrowserComponent,
-    RadioTimeSearchEngineComponent,
-    RadioTimeBrowserItemComponent,
     SoundcloudComponent,
     SoundcloudBrowserComponent,
     SoundcloudSearchComponent,
     WebRadioServerPlayButtonComponent,
     SoundcloudItemComponent,
-    RadioTimeChildElementComponent,
-    RadioTimeListComponent
+    CommunityRadioBrowserComponent,
+    BrowserComponent,
+    SearchEngineComponent
   ],
   imports: [
     BrowserModule,
@@ -80,8 +78,10 @@ import { RadioTimeListComponent } from './radio-time-list/radio-time-list.compon
     ReactiveFormsModule,
     FlexLayoutModule,
     AppRoutingModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,

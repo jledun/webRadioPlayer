@@ -32,7 +32,7 @@
           </span>
           <a *ngIf="imgUrl === '' && href !== ''" href="{{href}}" target="_blank">{{title}}</a>
           <span *ngIf="imgUrl === '' && href === ''">{{title}}</span>
-          <button mat-button (click)="createUrl()" class="toolbar-button">
+          <button mat-button (click)="createUrl()" class="toolbar-button" *ngIf="title === 'Bibliothèque'">
             <mat-icon>add</mat-icon>
             <span>Ajouter</span>
           </button>
