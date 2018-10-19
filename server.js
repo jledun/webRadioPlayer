@@ -12,8 +12,8 @@ const port = 6680;
 const mPlayerManager = require('./mplayer-manager.js');
 const mp = new mPlayerManager();
 
-const cors = require('cors');
-app.use(cors());
+// const cors = require('cors');
+// app.use(cors());
 
 const fileManager = require('./json-file-middleware.js');
 const jsonParser = require('body-parser').json();
