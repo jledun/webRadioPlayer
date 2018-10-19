@@ -168,10 +168,10 @@
         <!-- AFFICHAGE DU RÉSULTAT -->
         <mat-card>
           <mat-list *ngIf="stationList.length > 0">
-            <mat-list-item
-              *ngFor="let station of stationList">
-              {{station.name}}
-            </mat-list-item>
+            <app-web-radio-item-list
+              *ngFor="let station of stationList"
+              [webRadio]="station">
+            </app-web-radio-item-list>
           </mat-list>
           <mat-card-actions align="center">
             <button mat-button *ngIf="stationList.length >= (_filter.limit + _filter.offset)" (click)="moreResults()">Plus</button>

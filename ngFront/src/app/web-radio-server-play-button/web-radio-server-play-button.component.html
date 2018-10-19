@@ -1,6 +1,12 @@
-<button mat-mini-fab (click)="play()" *ngIf="url.status === 'stopped'">
+<button mat-mini-fab 
+  matTooltip="Jouer sur le serveur"
+  (click)="play()" 
+  *ngIf="url.status === 'stopped'">
   <mat-icon>play_arrow</mat-icon>
 </button>
-<button mat-mini-fab (click)="stop()" *ngIf="url.status !== 'stopped'">
+<button mat-mini-fab 
+  matTooltip="stop"
+  (click)="stop()" 
+  *ngIf="url.status !== 'stopped'">
   <mat-icon>stop</mat-icon>
 </button>

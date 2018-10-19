@@ -38,7 +38,7 @@ export class BrowserService {
   }
   searchStations(filter: any = {limit: 50, offset: 0}) {
     return this.http.post(
-      this.baseUrl.concat('search'),
+      this.baseUrl.concat('stations/search'),
       JSON.stringify(filter),
       {headers: this.headers}
     );

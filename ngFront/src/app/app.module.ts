@@ -49,6 +49,7 @@ import { SoundcloudItemComponent } from './soundcloud-item/soundcloud-item.compo
 import { CommunityRadioBrowserComponent } from './community-radio-browser/community-radio-browser.component';
 import { BrowserComponent } from './community-radio-browser/browser/browser.component';
 import { SearchEngineComponent } from './community-radio-browser/search-engine/search-engine.component';
+import { WebRadioItemListComponent } from './web-radio-item-list/web-radio-item-list.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { SearchEngineComponent } from './community-radio-browser/search-engine/s
     SoundcloudItemComponent,
     CommunityRadioBrowserComponent,
     BrowserComponent,
-    SearchEngineComponent
+    SearchEngineComponent,
+    WebRadioItemListComponent
   ],
   imports: [
     BrowserModule,

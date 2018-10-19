@@ -1,0 +1,12 @@
+<mat-list-item>
+  <img matListAvatar src="{{webRadio.favicon}}" alt="logo">
+  <h3 mat-line>{{webRadio.name}}</h3>
+  <p mat-line>{{webRadio.country}}</p>
+  <p mat-line>{{webRadio.tags}}</p>
+  <span class="fill-space"></span> 
+  <div fxLayout="row nowrap" fxLayoutAlign="space-between start" fxLayoutGap="15px">
+    <app-web-radio-server-play-button [url]="webRadio"></app-web-radio-server-play-button>
+    <app-web-radio-browser-player-button [url]="webRadio"></app-web-radio-browser-player-button>
+  </div>
+</mat-list-item>
+

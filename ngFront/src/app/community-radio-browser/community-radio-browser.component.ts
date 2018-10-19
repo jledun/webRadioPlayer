@@ -13,7 +13,7 @@ import { concatMap, debounceTime, finalize, map, startWith } from 'rxjs/operator
 })
 export class CommunityRadioBrowserComponent implements OnInit {
 
-  genLoading: boolean = true;
+  firstLoad: boolean = true;
   uiTool: FormGroup;
 
   stationList: Array<any> = [];
@@ -31,9 +31,10 @@ export class CommunityRadioBrowserComponent implements OnInit {
     return this._filter;
   }
   set filter(value) {
-    this._filter = value;
+    this._filter = Object.assign({}, this._filter, value);
+    if (this.firstLoad) return;
     this.b.searchStations(this._filter).subscribe(
-      data => console.log(data),
+      data => this.updateStationList(data),
       err => console.log(err),
       () => {}
     )
@@ -93,10 +94,11 @@ export class CommunityRadioBrowserComponent implements OnInit {
       startWith({}),
       debounceTime(2000)
     ).subscribe(
-      data => console.log('formGroup.valueChanges', data, this.selectedTagList)
+      data => {
+        if(data !== {}) this.filter = data
+      }
     );
-    this.refreshFilterDatas();
-    this.b.getLastPlayedStations(this.filter.limit).subscribe(
+    this.loadAllDatas().subscribe(
       data => this.updateStationList(data),
       err => console.log(err),
       () => {}
@@ -112,6 +114,10 @@ export class CommunityRadioBrowserComponent implements OnInit {
     }else{
       this.stationList = this.stationList.concat(data);
     }
+    this.stationList.forEach(station => {
+      if (!station.hasOwnProperty('status')) station.status = 'stopped';
+    });
+    this.firstLoad = false;
   }
   getTopClickStations() {
     this.resetFilter();
@@ -138,14 +144,11 @@ export class CommunityRadioBrowserComponent implements OnInit {
     )
   }
 
-  refreshFilterDatas(): void {
-    this.getTagList().pipe(
+  loadAllDatas(): Observable<any> {
+    return this.getTagList().pipe(
       concatMap(value => this.getCountryList()),
-      concatMap(val => this.getRegionList())
-    ).subscribe(
-      data => {},
-      err => console.log(err),
-      () => {}
+      concatMap(val => this.getRegionList()),
+      concatMap(val => this.b.getLastPlayedStations(this.filter.limit))
     );
   }
   getCountryList(): Observable<any[]> {
