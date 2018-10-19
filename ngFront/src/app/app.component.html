@@ -38,7 +38,10 @@
           </button>
           <span fxShow.lt-sm="false" *ngIf="displayTitle()" class="fill-space"></span>
           <span *ngIf="displayTitle()">
-              {{mPlayer.status.url.name}}
+            <button mat-icon-button (click)="stopStream()">
+              <mat-icon>stop</mat-icon>
+            </button>
+            {{mPlayer.status.url.name}}
           </span>
           <span class="fill-space"></span>
           <button mat-mini-fab (click)="volumeDown()" class="toolbar-button">

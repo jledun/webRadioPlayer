@@ -60,6 +60,9 @@ export class AppComponent {
   volumeDown() {
     this.mPlayer.volumeDown();
   }
+  stopStream() {
+    this.mPlayer.stop({});
+  }
   createUrl() {
     const dialogRef = this.dialog.open(WebRadioEditorComponent, {
       width: '40%',

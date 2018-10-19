@@ -23,7 +23,7 @@ export class CommunityRadioBrowserComponent implements OnInit {
     offset: 0,
     order: 'vote'
   }
-  private _filter: any = this.filterDefaultValue;
+  public _filter: any = this.filterDefaultValue;
   resetFilter() {
     this._filter = this.filterDefaultValue;
   }

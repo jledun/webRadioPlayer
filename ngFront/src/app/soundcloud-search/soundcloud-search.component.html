@@ -2,7 +2,7 @@
   <mat-card>
 
     <mat-card-header>
-      <form class="full-size" (submit)="search($event)" fxLayout="row wrap" fxLayoutAlign="stretch center" fxLayoutGap="5px">
+      <form class="full-size" (submit)="search()" fxLayout="row wrap" fxLayoutAlign="stretch center" fxLayoutGap="5px">
         <mat-form-field fxFlex="1 1 auto">
           <input type="search" matInput placeholder="Saisir des mots clés" [formControl]="searchField">
           <mat-icon matSuffix>search</mat-icon>

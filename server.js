@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require('express');
+const fallback = require('express-history-api-fallback')
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -23,7 +24,9 @@ app.post('/fileActions', fileManager.post);
 app.put('/fileActions/:id', fileManager.put);
 app.delete('/fileActions/:id', fileManager.delete);
 
-app.use(express.static(path.resolve(__dirname, 'front')));
+const root = path.resolve(__dirname, 'front');
+app.use(express.static(root));
+app.use(fallback('index.html', { root: root }))
 
 io.on('connection', (socket) => {
   socket.on('disconnect', reason => {
