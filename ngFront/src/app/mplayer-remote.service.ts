@@ -35,13 +35,13 @@ export class MplayerRemoteService {
   ) {
     this.serverUrl = new URL(window.location.href);
     console.log(this.serverUrl);
-    this.socket = io(this.serverUrl.href);
+    this.socket = io(this.serverUrl.origin);
     // this.socket = io('http://192.168.1.108:6680');
     // this.socket = io('http://localhost:6680');
     this.socket.on('url', url => this.url = url);
     this.socket.on('status', status => this.status = status);
    
-    this.apiUrl = this.serverUrl.href.concat('fileActions');
+    this.apiUrl = this.serverUrl.origin.concat('/fileActions');
     // this.apiUrl = 'http://192.168.1.108:6680'.concat('/fileActions');
     // this.apiUrl = 'http://localhost:6680'.concat('/fileActions');
     this.httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
