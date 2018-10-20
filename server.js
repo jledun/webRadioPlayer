@@ -18,15 +18,15 @@ const mp = new mPlayerManager();
 const fileManager = require('./json-file-middleware.js');
 const jsonParser = require('body-parser').json();
 
+const root = path.resolve(__dirname, 'front');
+app.use(express.static(root));
+app.use(fallback('index.html', { root: root }))
+
 app.use('/fileActions', jsonParser);
 app.get('/fileActions', fileManager.get);
 app.post('/fileActions', fileManager.post);
 app.put('/fileActions/:id', fileManager.put);
 app.delete('/fileActions/:id', fileManager.delete);
-
-const root = path.resolve(__dirname, 'front');
-app.use(express.static(root));
-app.use(fallback('index.html', { root: root }))
 
 io.on('connection', (socket) => {
   socket.on('disconnect', reason => {
