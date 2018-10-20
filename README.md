@@ -35,6 +35,8 @@ http://192.168.1.2:6680
 
 then simply press the play button on the web radio you'd like to play.
 
+# Features
+
 ## web radio list
 
 With your favorite text editor, edit radioStreams.json and add or remove web radios.
@@ -48,6 +50,20 @@ You can play the web radio on the server (raspberry pi or other, any equipment r
 You can also stream web radio directly in your web browser.
 
 Because I don't know about mplayer on Windows, this project don't support Windows OS for the server.
+
+## Soundcloud API
+
+Display recent sounds from soundcloud.com.
+
+Search in soundcloud library.
+
+More informations on Soundcloud [here](https://soundcloud.com/ "Soundcloud.com") and Soundcloud API [here](https://developers.soundcloud.com/ "Soundcloud API").
+
+## Community Radio Browser
+
+Browse Community Radio Browser and search by name, tags, country and region.
+
+More information on Community Radio Browser [here](http://www.radio-browser.info/gui/#/ "Community Radio Browser") and Community Radio Browser API [here](http://www.radio-browser.info/webservice "Community Radio Browser API").
 
 # Develop and test
 
@@ -95,11 +111,19 @@ The web UI is developed with @angular v6, @angular/material
 # TODO
 
 * show mplayer statistics
-* include web radio search on opml.radiotime.com then automaticaly add new web radios
+* improve search in soundcloud library (by artist, sort, ...)
+* improve performances on Community Radio Browser filters: cache tag list, country list and region list on server with every day update.
+* add User-Agent headers for Community Radio Browser API.
 
 # Contribute
 
-Please submit an issue before creating a pull request.
+## Question, issues
+
+Please, submit an issue.
+
+## Bugfix or new feature
+
+Please create a pull request.
 
 # Contributors
 

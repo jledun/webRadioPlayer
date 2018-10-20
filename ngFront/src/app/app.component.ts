@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { MplayerRemoteService } from './mplayer-remote.service';
@@ -9,7 +9,7 @@ import { WebRadioEditorComponent } from './web-radio-editor/web-radio-editor.com
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Saballe Web Radio Player';
   imgUrl = '';
   href = '';
@@ -38,7 +38,9 @@ export class AppComponent {
     public dialog: MatDialog,
     public mPlayer: MplayerRemoteService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.router.events.subscribe(
       data => {
         if (
