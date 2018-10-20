@@ -14,7 +14,6 @@ export class WebRadioServerPlayButtonComponent  {
   ) { }
   
   play() {
-    console.log(this.url);
     if (this.url.hasOwnProperty('url')) return this.mp.play(this.url);
   }
 
