@@ -5,6 +5,7 @@
   <p mat-line>{{webRadio.tags}}</p>
   <span class="fill-space"></span> 
   <div fxLayout="row nowrap" fxLayoutAlign="space-between start" fxLayoutGap="15px">
+    <app-web-radio-library-add-button [url]="webRadio"></app-web-radio-library-add-button>
     <app-web-radio-server-play-button [url]="webRadio"></app-web-radio-server-play-button>
     <app-web-radio-browser-player-button [url]="webRadio"></app-web-radio-browser-player-button>
   </div>

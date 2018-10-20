@@ -174,7 +174,8 @@
             </app-web-radio-item-list>
           </mat-list>
           <mat-card-actions align="center">
-            <button mat-button *ngIf="stationList.length >= (_filter.limit + _filter.offset)" (click)="moreResults()">Plus</button>
+            <!--button mat-button [disabled]="displayMoreResult()" (click)="moreResults()">Plus</button-->
+            <button mat-button (click)="moreResults()">Plus</button>
           </mat-card-actions>
         </mat-card>
     </mat-card-content>

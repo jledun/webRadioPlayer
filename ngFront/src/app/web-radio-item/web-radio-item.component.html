@@ -1,5 +1,6 @@
 <mat-card>
   <mat-card-header>
+    <img mat-card-avatar src="{{url.image}}" *ngIf="url.image && url.image !== ''">
     <mat-card-title>{{url.name}}</mat-card-title>
     <span class="fill-space"></span>
     <button mat-icon-button [matMenuTriggerFor]="editRadioMenu"><mat-icon>more_vert</mat-icon></button>

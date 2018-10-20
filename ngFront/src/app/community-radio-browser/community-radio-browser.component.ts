@@ -32,6 +32,9 @@ export class CommunityRadioBrowserComponent implements OnInit {
   }
   set filter(value) {
     this._filter = Object.assign({}, this._filter, value);
+    this._filter.tag = (this.selectedTagList.length > 0) ? 
+      this.selectedTagList.reduce((acc, tag) => acc = acc.concat(tag.value), '') : 
+      '';
     if (this.firstLoad) return;
     this.b.searchStations(this._filter).subscribe(
       data => this.updateStationList(data),
@@ -75,7 +78,7 @@ export class CommunityRadioBrowserComponent implements OnInit {
     );
     this.uiTool.get('country').valueChanges.pipe(
       startWith(''),
-      debounceTime(500),
+      debounceTime(1000),
       concatMap(val => this.getRegionList(val))
     ).subscribe(
       data => {},
@@ -105,8 +108,14 @@ export class CommunityRadioBrowserComponent implements OnInit {
     )
   }
 
+  displayMoreResult() {
+    return this.stationList.length >= (this.filter.limit + this.filter.offset);
+  }
   moreResults() {
-    this.filter.offset = this.filter.offset + this.filter.limit;
+    if (this.stationList.length < (this.filter.limit + this.filter.offset)) return;
+    this.filter = Object.assign({}, this.filter, {
+      offset: this.filter.offset + this.filter.limit
+    });
   }
   updateStationList(data) {
     if (this.filter.offset === 0) {
@@ -116,6 +125,8 @@ export class CommunityRadioBrowserComponent implements OnInit {
     }
     this.stationList.forEach(station => {
       if (!station.hasOwnProperty('status')) station.status = 'stopped';
+      if (!station.hasOwnProperty('image')) station.image = (station.favicon) ? station.favicon : '';
+      if (!station.librarySource) station.librarySource = 'community';
     });
     this.firstLoad = false;
   }
@@ -145,10 +156,10 @@ export class CommunityRadioBrowserComponent implements OnInit {
   }
 
   loadAllDatas(): Observable<any> {
-    return this.getTagList().pipe(
+    return this.b.getLastPlayedStations().pipe(
+      concatMap(val => this.getTagList(this.filter.limit)),
       concatMap(value => this.getCountryList()),
-      concatMap(val => this.getRegionList()),
-      concatMap(val => this.b.getLastPlayedStations(this.filter.limit))
+      concatMap(val => this.getRegionList())
     );
   }
   getCountryList(): Observable<any[]> {

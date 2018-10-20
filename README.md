@@ -117,8 +117,8 @@ The web UI is developed with @angular v6, @angular/material
  * server should play each title of the playlist
  * add title to playlist from soundcloud interface
 * improve performances on Community Radio Browser filters: cache tag list, country list and region list on server with every day update.
+* improve image loading in Community Radio Browser and performances
 * add User-Agent headers for Community Radio Browser API.
-* add a "add to library" button in Community Web Radio browser
 * check broken url in library
 
 # Contribute

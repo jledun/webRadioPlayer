@@ -50,6 +50,7 @@ import { CommunityRadioBrowserComponent } from './community-radio-browser/commun
 import { BrowserComponent } from './community-radio-browser/browser/browser.component';
 import { SearchEngineComponent } from './community-radio-browser/search-engine/search-engine.component';
 import { WebRadioItemListComponent } from './web-radio-item-list/web-radio-item-list.component';
+import { WebRadioLibraryAddButtonComponent } from './web-radio-library-add-button/web-radio-library-add-button.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { WebRadioItemListComponent } from './web-radio-item-list/web-radio-item-
     CommunityRadioBrowserComponent,
     BrowserComponent,
     SearchEngineComponent,
-    WebRadioItemListComponent
+    WebRadioItemListComponent,
+    WebRadioLibraryAddButtonComponent
   ],
   imports: [
     BrowserModule,

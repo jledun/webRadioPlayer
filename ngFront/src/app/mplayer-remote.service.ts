@@ -70,7 +70,7 @@ export class MplayerRemoteService {
     this.snackBar.open('Données mises à jour :-)', 'Ok', {duration: 2000});
   }
   private failure(err) {
-    console.log(err);
+    console.error(err);
     this.snackBar.open("Une erreur s'est produite", 'Ok', {duration: 2000})
   }
 
