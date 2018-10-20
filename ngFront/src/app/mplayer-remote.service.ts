@@ -53,6 +53,7 @@ export class MplayerRemoteService {
       && this.socket.connected) ? true : false;
   }
   play(url) {
+    console.log(url);
     if (!this.checkSocket()) return;
     this.socket.emit('playStream', url);
   }
