@@ -34,6 +34,7 @@ export class MplayerRemoteService {
     private http: HttpClient
   ) {
     this.serverUrl = new URL(window.location.href);
+    console.log(this.serverUrl);
     this.socket = io(this.serverUrl.href);
     // this.socket = io('http://192.168.1.108:6680');
     // this.socket = io('http://localhost:6680');
