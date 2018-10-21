@@ -1,7 +1,7 @@
 <mat-list-item>
-  <img matListAvatar src="{{webRadio.favicon}}" alt="logo">
+  <img matListAvatar [src]="imgUrl" alt="">
   <h3 mat-line>{{webRadio.name}}</h3>
-  <p mat-line>{{webRadio.country}}</p>
+  <p mat-line>{{webRadio.country}}<span *ngIf="webRadio.state !== ''"> - {{webRadio.state}}</span></p>
   <p mat-line>{{webRadio.tags}}</p>
   <span class="fill-space"></span> 
   <div fxLayout="row nowrap" fxLayoutAlign="space-between start" fxLayoutGap="15px">

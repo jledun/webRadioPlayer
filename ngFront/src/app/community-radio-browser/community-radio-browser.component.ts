@@ -1,6 +1,6 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder} from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import { BrowserService } from './browser.service';
 import { Observable, of, throwError } from 'rxjs';
@@ -14,6 +14,7 @@ import { concatMap, debounceTime, finalize, map, startWith } from 'rxjs/operator
 export class CommunityRadioBrowserComponent implements OnInit {
 
   firstLoad: boolean = true;
+  stationListLoading: boolean = true;
   uiTool: FormGroup;
 
   stationList: Array<any> = [];
@@ -25,6 +26,7 @@ export class CommunityRadioBrowserComponent implements OnInit {
   }
   public _filter: any = this.filterDefaultValue;
   resetFilter() {
+    this.stationListLoading = true;
     this._filter = this.filterDefaultValue;
   }
   get filter() {
@@ -36,26 +38,38 @@ export class CommunityRadioBrowserComponent implements OnInit {
       this.selectedTagList.reduce((acc, tag) => acc = acc.concat(tag.value), '') : 
       '';
     if (this.firstLoad) return;
-    this.b.searchStations(this._filter).subscribe(
-      data => this.updateStationList(data),
-      err => console.log(err),
-      () => {}
-    )
+    this.stationListLoading = true;
+    if (
+      (!this._filter.country || this._filter.country === '') &&
+      (!this._filter.state || this._filter.state === '') &&
+      (!this._filter.name || this._filter.name === '') &&
+      (!this._filter.tag || this._filter.tag === '')
+    ) {
+      this.resetFilter();
+      this.b.getLastPlayedStations();
+    }else{
+      this.b.searchStations(this._filter).subscribe(
+        data => this.updateStationList(data),
+        err => console.log(err),
+        () => {}
+      )
+    }
   }
 
   countryList: Array<any> = [];
   filteredCountryList: Observable<any[]>;
   countryListIsLoading: boolean = false;
 
-  regionList: Array<any> = [];
-  filteredRegionList: Observable<any[]>;
-  regionListIsLoading: boolean = false;
+  stateList: Array<any> = [];
+  filteredStateList: Observable<any[]>;
+  stateListIsLoading: boolean = false;
 
   tagList: Array<any> = [];
   selectedTagList: Array<any> = [];
   filteredTagList: Observable<any[]>;
   tagListIsLoading: boolean = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
+  tags: FormControl = new FormControl();
 
   constructor(
     private fb: FormBuilder,
@@ -63,9 +77,7 @@ export class CommunityRadioBrowserComponent implements OnInit {
   ) {
     this.uiTool = this.fb.group({
       country: '',
-      region: '',
-      language: '',
-      tags: [''],
+      state: '',
       name: '',
       order: 'vote'
     });
@@ -79,17 +91,20 @@ export class CommunityRadioBrowserComponent implements OnInit {
     this.uiTool.get('country').valueChanges.pipe(
       startWith(''),
       debounceTime(1000),
-      concatMap(val => this.getRegionList(val))
+      concatMap(val => {
+        if (val === '') return of(null);
+        return this.getStateList(val);
+      })
     ).subscribe(
       data => {},
       err => console.log(err),
       () => {}
     );
-    this.filteredRegionList = this.uiTool.get('region').valueChanges.pipe(
+    this.filteredStateList = this.uiTool.get('state').valueChanges.pipe(
       startWith(''),
-      map(value => this.filterRegionList(value))
+      map(value => this.filterStateList(value))
     );
-    this.filteredTagList = this.uiTool.get('tags').valueChanges.pipe(
+    this.filteredTagList = this.tags.valueChanges.pipe(
       startWith(''),
       map((value: string | null) => (value) ? this.filterTagList(value) : this.tagList.slice())
     );
@@ -128,6 +143,7 @@ export class CommunityRadioBrowserComponent implements OnInit {
       if (!station.hasOwnProperty('image')) station.image = (station.favicon) ? station.favicon : '';
       if (!station.librarySource) station.librarySource = 'community';
     });
+    this.stationListLoading = false;
     this.firstLoad = false;
   }
   getTopClickStations() {
@@ -156,10 +172,10 @@ export class CommunityRadioBrowserComponent implements OnInit {
   }
 
   loadAllDatas(): Observable<any> {
-    return this.b.getLastPlayedStations().pipe(
-      concatMap(val => this.getTagList(this.filter.limit)),
-      concatMap(value => this.getCountryList()),
-      concatMap(val => this.getRegionList())
+    return this.getCountryList().pipe(
+      concatMap(val => this.getStateList()),
+      concatMap(val => this.getTagList()),
+      concatMap(value => this.b.getLastPlayedStations()),
     );
   }
   getCountryList(): Observable<any[]> {
@@ -171,12 +187,12 @@ export class CommunityRadioBrowserComponent implements OnInit {
       finalize(() => this.countryListIsLoading = false)
     );
   }
-  getRegionList(country: string = ''): Observable<any[]> {
-    if (this.regionListIsLoading) return of(this.regionList);
-    this.regionListIsLoading = true;
-    return this.b.getRegions(country).pipe(
-      map(data => this.regionList = [].concat(data)),
-      finalize(() => this.regionListIsLoading = false)
+  getStateList(country: string = ''): Observable<any[]> {
+    if (this.stateListIsLoading) return of(this.stateList);
+    this.stateListIsLoading = true;
+    return this.b.getStates(country).pipe(
+      map(data => this.stateList = [].concat(data)),
+      finalize(() => this.stateListIsLoading = false)
     );
   }
   getTagList(filter: string = ''): Observable<any[]> {
@@ -192,9 +208,9 @@ export class CommunityRadioBrowserComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.countryList.filter(country => country.name.toLowerCase().includes(filterValue));
   }
-  private filterRegionList(value: string): string[] {
+  private filterStateList(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.regionList.filter(region => region.name.toLowerCase().includes(filterValue));
+    return this.stateList.filter(state => state.name.toLowerCase().includes(filterValue));
   }
   private filterTagList(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -209,29 +225,32 @@ export class CommunityRadioBrowserComponent implements OnInit {
     const index = this.tagList.findIndex(t => t.name.toLowerCase() === value);
     if ((value || '')) {
       this.selectedTagList.push((index >= 0) ? 
-          Object.assign({}, this.tagList[index]) :
-          Object.assign({}, {
-            name: value.toLowerCase(),
-            value: value.toLowerCase(),
-            stationcount: 0
-          })
+        Object.assign({}, this.tagList[index]) :
+        Object.assign({}, {
+          name: value.toLowerCase(),
+          value: value.toLowerCase(),
+          stationcount: 0
+        })
       );
+      this.filter = Object.assign({}, this.filter);
     }
     if (input) input.value = '';
-    this.uiTool.get('tags').setValue(null);
+    this.tags.setValue(null);
   }
 
   removeTag(tag: string): void {
     const index = this.selectedTagList.indexOf(tag);
     if (index >= 0) {
       this.selectedTagList.splice(index, 1);
+      this.filter = Object.assign({}, this.filter, {tag: ''});
     }
   }
 
   selectedTag(event: MatAutocompleteSelectedEvent): void {
     this.selectedTagList.push(this.tagList.find(t => t.name === event.option.value));
     this.tagInput.nativeElement.value = '';
-    this.uiTool.get('tags').setValue(null);
+    this.tags.setValue(null);
+    this.filter = Object.assign({}, this.filter);
   }
 
 }

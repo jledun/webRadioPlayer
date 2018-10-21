@@ -66,12 +66,12 @@
                     <input
                       placeholder="Sélectionner des tags"
                       #tagInput
-                      formControlName="tags"
+                      [formControl]="tags"
                       [matAutocomplete]="tagComplete"
                       [matChipInputFor]="tagChipList"
                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                      matChipInputAddOnBlur="true"
-                      (matChipInputTokenEnd)="addTag($event)">
+                      matChipInputAddOnBlur="true">
+                      <!--(matChipInputTokenEnd)="addTag($event)"-->
                   </mat-chip-list>
                   <mat-autocomplete #tagComplete="matAutocomplete" (optionSelected)="selectedTag($event)">
                     <mat-option *ngFor="let tag of filteredTagList | async" [value]="tag.name">
@@ -120,20 +120,20 @@
                 <!-- COUNTRY SELECTOR -->
 
                 <!-- REGION SELECTOR -->
-                <mat-form-field *ngIf="regionList.length > 0" fxFlex="0 0 100%">
+                <mat-form-field *ngIf="stateList.length > 0" fxFlex="0 0 100%">
                   <input type="text" 
                     matInput 
                     placeholder="Région / état"
                     aria-label="Région / état"
-                    [matAutocomplete]="regionComplete" 
-                    formControlName="region">
-                  <mat-autocomplete #regionComplete="matAutocomplete">
-                    <mat-option *ngFor="let region of filteredRegionList | async" [value]="region.name">
-                      {{ region.name }} ({{region.stationcount}})
+                    [matAutocomplete]="stateComplete" 
+                    formControlName="state">
+                  <mat-autocomplete #stateComplete="matAutocomplete">
+                    <mat-option *ngFor="let state of filteredStateList | async" [value]="state.name">
+                      {{ state.name }} ({{state.stationcount}})
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>
-                <mat-form-field *ngIf="regionList.length <= 0" fxFlex="0 0 100%">
+                <mat-form-field *ngIf="stateList.length <= 0" fxFlex="0 0 100%">
                   <input type="text" 
                     matInput 
                     placeholder="Région / état"
@@ -166,6 +166,7 @@
         </mat-card>
         
         <!-- AFFICHAGE DU RÉSULTAT -->
+        <mat-progress-bar mode="indeterminate" *ngIf="stationListLoading"></mat-progress-bar>
         <mat-card>
           <mat-list *ngIf="stationList.length > 0">
             <app-web-radio-item-list
@@ -174,6 +175,7 @@
             </app-web-radio-item-list>
           </mat-list>
           <mat-card-actions align="center">
+            <mat-progress-bar mode="indeterminate" *ngIf="stationListLoading && stationList.length > 0"></mat-progress-bar>
             <!--button mat-button [disabled]="displayMoreResult()" (click)="moreResults()">Plus</button-->
             <button mat-button (click)="moreResults()">Plus</button>
           </mat-card-actions>
