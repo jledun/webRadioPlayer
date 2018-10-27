@@ -132,6 +132,7 @@ This command will build angular production modules and copy the result in the fo
  - add title to playlist from soundcloud interface
 * improve image loading in Community Radio Browser and performances
 * add User-Agent headers for Community Radio Browser API.
+* implement Community Radio Browser 'click' and 'vote'
 * check broken url in library
 * add and register a service file (init.d or systemd, the best would be both)
 * create a package for the most popular GNU/Linux distros.
