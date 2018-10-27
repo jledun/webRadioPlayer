@@ -12,7 +12,7 @@ Install the following packages :
 * nodejs + npm
 * mplayer
 
-and everything to get some sound on your client
+and everything to get some sound on your client.
 
 ## run application
 
@@ -37,9 +37,7 @@ then simply press the play button on the web radio you'd like to play.
 
 # Features
 
-## web radio list
-
-With your favorite text editor, edit radioStreams.json and add or remove web radios.
+## web radio library
 
 By default, there's a few french web radios (because I'm french).
 
@@ -49,7 +47,7 @@ You can play the web radio on the server (raspberry pi or other, any equipment r
 
 You can also stream web radio directly in your web browser.
 
-Because I don't know about mplayer on Windows, this project don't support Windows OS for the server.
+Because I don't know about mplayer on Windows, this project doesn't support Windows OS for the server.
 
 ## Soundcloud API
 
@@ -100,25 +98,43 @@ The web UI is developed with @angular v6, @angular/material
 > cd ngFront
 > ng serve # option : --host x.x.x.x
 ```
+Then you can use @angular/cli to create and manage angular components, edit the existing components, ...
+
+Simply browse to http://localhost:4200 (or http://x.x.x.x:4200 if you've specified a host to ng serve) to see the result of your modifications.
+
+Angular project documentations is available [here](https://angular.io angular).
+
+The project also use @angular/material components, documentation is available [here](https://material.angular.io angular material).
 
 ## Update web UI on the server
+
+The folder ngFront hosts the development files for angular application.
+
+The folder front hosts the files served by the embedded web server of the main application.
+
+To apply your changes in the angular project to the main web ui, simply run :
 
 ```
 > cd ngFront
 > npm run build
 ```
+This command will build angular production modules and copy the result in the folder front.
 
 # TODO
 
+* implement i18n to make this app international
 * show mplayer statistics
+* add the possibility to search and order the library
 * improve search in soundcloud library (by artist, sort, ...)
 * create and manage playlist for soundcloud : a local playlist system while browsing soundcloud :
- * create a local playlist system
- * server should play each title of the playlist
- * add title to playlist from soundcloud interface
+ - create a local playlist system
+ - server should play each title of the playlist
+ - add title to playlist from soundcloud interface
 * improve image loading in Community Radio Browser and performances
 * add User-Agent headers for Community Radio Browser API.
 * check broken url in library
+* add and register a service file (init.d or systemd, the best would be both)
+* create a package for the most popular GNU/Linux distros.
 
 # Contribute
 
@@ -128,7 +144,7 @@ Please, submit an issue.
 
 ## Bugfix or new feature
 
-Please create a pull request.
+Please create a pull request or submit an issue.
 
 # Contributors
 
