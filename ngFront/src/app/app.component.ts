@@ -48,9 +48,11 @@ export class AppComponent implements OnInit {
           data.hasOwnProperty('url') && 
           data.url !== ''
         ) {
-          this.title = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).title;
-          this.imgUrl = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).img;
-          this.href = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0).href;
+          let navPosition = this.navButtons.find(elm => data.url.indexOf(elm.link) >= 0);
+          if (!navPosition) navPosition = this.navButtons[0];
+          this.title = navPosition.title;
+          this.imgUrl = navPosition.img;
+          this.href = navPosition.href;
         }
       }
     )
