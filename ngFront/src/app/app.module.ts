@@ -55,6 +55,26 @@ import { WebRadioLibraryAddButtonComponent } from './web-radio-library-add-butto
 
 
 @NgModule({
+  exports: [
+    AppComponent,
+    AppRoutingModule,
+    StatusComponent,
+    WebRadioLibraryComponent,
+    WebRadioItemComponent,
+    WebRadioEditorComponent,
+    WebRadioBrowserPlayerComponent,
+    WebRadioBrowserPlayerButtonComponent,
+    WebRadioServerPlayButtonComponent
+    SoundcloudComponent,
+    SoundcloudBrowserComponent,
+    SoundcloudSearchComponent,
+    SoundcloudItemComponent,
+    CommunityRadioBrowserComponent,
+    BrowserComponent,
+    SearchEngineComponent,
+    WebRadioItemListComponent,
+    WebRadioLibraryAddButtonComponent
+  ],
   declarations: [
     AppComponent,
     WebRadioItemComponent,
