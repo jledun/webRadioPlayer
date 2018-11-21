@@ -33,12 +33,20 @@ export class MplayerRemoteService {
     private snackBar: MatSnackBar,
     private http: HttpClient
   ) {
-    this.serverUrl = new URL(window.location.href);
-    this.socket = io(this.serverUrl.origin);
+
+    // uncomment for security improvement
+    // const origin = ''.concat(new URL(window.location.href).origin);
+
+
+    // comment for security improvement
+    let origin = ''.concat(new URL(window.location.href).origin);
+    origin = "http://192.168.1.230:6680";
+    
+    this.socket = io(origin);
     this.socket.on('url', url => this.url = url);
     this.socket.on('status', status => this.status = status);
    
-    this.apiUrl = this.serverUrl.origin.concat('/fileActions');
+    this.apiUrl = origin.concat('/fileActions');
     this.httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     this.getUrl();
   }
