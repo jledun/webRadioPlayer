@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/jledun/webRadioPlayer",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
-    "express": "^4.16.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "express-history-api-fallback": "^2.2.1",
     "material-design-icons": "^3.0.1",
-    "rxjs": "^6.3.3",
-    "rxjs-compat": "^6.3.3",
-    "socket.io": "^2.1.1"
+    "rxjs": "^6.5.2",
+    "rxjs-compat": "^6.5.2",
+    "socket.io": "^2.2.0"
   }
 }
