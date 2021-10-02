@@ -146,6 +146,11 @@
   "name": "Spoon Radio",
   "url": "http://spoonradio.ice.infomaniak.ch/spoonradio-hd.mp3"
  },
+  {
+  "name": "RADIO 80 UK",
+  "url": "http://uk7.internet-radio.com:8226/live.m3u&t=.pls",
+  "id": 29
+ },
  {
   "name": "RADIO HABANA SON CUBA",
   "url": "http://stream.zenolive.com/csqge48g044tv",
